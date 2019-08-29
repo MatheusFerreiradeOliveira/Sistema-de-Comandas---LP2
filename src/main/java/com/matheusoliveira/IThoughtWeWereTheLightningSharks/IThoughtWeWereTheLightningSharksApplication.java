@@ -1,0 +1,13 @@
+package com.matheusoliveira.IThoughtWeWereTheLightningSharks;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class IThoughtWeWereTheLightningSharksApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(IThoughtWeWereTheLightningSharksApplication.class, args);
+	}
+
+}
