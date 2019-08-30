@@ -21,6 +21,10 @@ public class ProdutoService {
 		return repository.findOne(id);
 	}
 	
+	public Produto insert(Produto p) {
+		return repository.insert(p);
+	}
+	
 	public void deleteById(String id) {
 		repository.delete(id);
 	}
