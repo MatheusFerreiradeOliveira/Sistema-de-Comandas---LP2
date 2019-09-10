@@ -13,7 +13,7 @@ public class Produto implements Serializable{
 	private String id;
 	private String nome;
 	private Double valor;
-	private int qtd;
+	private int qtd;//estoque
 	private boolean peso;
 	
 	public Produto() {}

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,15 @@ public class ProdutoResource {
 		return (obj!=null) ? ResponseEntity.ok(obj) : 
 			ResponseEntity.notFound().build();
 	} 
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Produto> findById(@PathVariable String id, 
+											@RequestBody Produto p){
+		p.setId(id);
+		p=service.update(p);
+		return ResponseEntity.noContent().build();
+	}
+	
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody Produto p) {
 		Produto obj = service.insert(p);

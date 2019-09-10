@@ -1,8 +1,6 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.config;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -26,9 +24,7 @@ public class Instantiation implements CommandLineRunner {
 		Produto p4 = new Produto(null, "Cerveja", (3.50),100, false);
 		Produto p5 = new Produto(null, "Lombinho do Micaias", (0.05),1, false);
 		//List<Produto> produto= new ArrayList<Produto>();
-		produtoRepository.save(Arrays.asList(p1,p2,p3,p4,p5));
-		
-		
+		produtoRepository.save(Arrays.asList(p1,p2,p3,p4,p5));	
 	}
 
 }
