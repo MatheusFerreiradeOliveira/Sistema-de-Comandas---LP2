@@ -41,10 +41,10 @@ public class CompraService {
 	}
 	
 	public void change(Compra p1, Compra p2) {
-		p1.setBolsonaros(p2.getBolsonaros());
+		p1.setDinheiro(p2.getDinheiro());
 		p1.setCartao(p2.getCartao());
-		p1.setHoraabertura(p2.getHoraabertura());
-		p1.setHoraencerramento(p2.getHoraencerramento());
+		p1.setAbertura(p2.getAbertura());
+		p1.setEncerramento(p2.getEncerramento());
 		p1.setPedidos(p2.getPedidos());
 	}
 	

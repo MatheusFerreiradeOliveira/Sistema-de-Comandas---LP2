@@ -38,8 +38,7 @@ public class ProdutoResource {
 	} 
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> findById(@PathVariable String id, 
-											@RequestBody Produto p){
+	public ResponseEntity<Produto> update(@PathVariable String id,@RequestBody Produto p){
 		p.setId(id);
 		p=service.update(p);
 		return ResponseEntity.noContent().build();

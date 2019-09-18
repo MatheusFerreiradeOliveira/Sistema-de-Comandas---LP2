@@ -10,57 +10,57 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Compra {
 	@Id
-	String id;
-	//int mesa;
-	Date horaabertura;
-	Date horaencerramento;
-	float cartao;
-	float bolsonaros;
+	private String id;
+	private Date abertura;
+	private Date encerramento;
+	private Double cartao;
+	private Double dinheiro;
 	
-	List<Pedido> pedidos = new ArrayList<>();
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Compra() {};
 
-	public Compra(String id, Date horaabertura, Date horaencerramento, float cartao, float bolsonaros,
+	public Compra(String id, Date abertura, Date encerramento, Double cartao, Double dinheiro,
 			List<Pedido> pedidos) {
 		super();
 		this.id = id;
-		this.horaabertura = horaabertura;
-		this.horaencerramento = horaencerramento;
+		this.abertura = abertura;
+		this.encerramento = encerramento;
 		this.cartao = cartao;
-		this.bolsonaros = bolsonaros;
+		this.dinheiro = dinheiro;
 		this.pedidos = pedidos;
 	}
-
+	
+	/*getters and setters*/
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getHoraabertura() {
-		return horaabertura;
+	public Date getAbertura() {
+		return abertura;
 	}
-	public void setHoraabertura(Date horaabertura) {
-		this.horaabertura = horaabertura;
+	public void setAbertura(Date abertura) {
+		this.abertura = abertura;
 	}
-	public Date getHoraencerramento() {
-		return horaencerramento;
+	public Date getEncerramento() {
+		return encerramento;
 	}
-	public void setHoraencerramento(Date horaencerramento) {
-		this.horaencerramento = horaencerramento;
+	public void setEncerramento(Date encerramento) {
+		this.encerramento = encerramento;
 	}
-	public float getCartao() {
+	public Double getCartao() {
 		return cartao;
 	}
-	public void setCartao(float cartao) {
+	public void setCartao(Double cartao) {
 		this.cartao = cartao;
 	}
-	public float getBolsonaros() {
-		return bolsonaros;
+	public Double getDinheiro() {
+		return dinheiro;
 	}
-	public void setBolsonaros(float bolsonaros) {
-		this.bolsonaros = bolsonaros;
+	public void setDinheiro(Double dinheiro) {
+		this.dinheiro = dinheiro;
 	}
 	
 	public List<Pedido> getPedidos() {

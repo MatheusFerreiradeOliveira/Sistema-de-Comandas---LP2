@@ -45,7 +45,7 @@ public class PedidoService {
 		p1.setObs(p2.getObs());
 		p1.setProduto(p2.getProduto());
 		p1.setQtdItens(p2.getQtdItens());
-		p1.setValor(p2.getValor());
+		p1.setValorTotal(p2.getValorTotal());
 	}
 	
 	public void deleteById(String id) {

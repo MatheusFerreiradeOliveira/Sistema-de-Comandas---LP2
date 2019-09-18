@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="produto")
+@Document(collection="produtos")
 public class Produto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -13,20 +13,18 @@ public class Produto implements Serializable{
 	private String id;
 	private String nome;
 	private Double valor;
-	private int qtd;//estoque
 	private boolean peso;
 	
 	public Produto() {}
 	
-	public Produto(String id, String nome, Double valor, int qtd, boolean peso) {
+	public Produto(String id, String nome, Double valor,  boolean peso) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.valor = valor;
-		this.qtd = qtd;
 		this.peso = peso;
 	}
-
+	/*getters and setters*/
 	public String getId() {
 		return id;
 	}
@@ -44,12 +42,6 @@ public class Produto implements Serializable{
 	}
 	public void setValor(Double valor) {
 		this.valor = valor;
-	}
-	public int getQtd() {
-		return qtd;
-	}
-	public void setQtd(int qtd) {
-		this.qtd = qtd;
 	}
 	public boolean isPeso() {
 		return peso;

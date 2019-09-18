@@ -25,6 +25,7 @@ public class PedidoResource {
 	@Autowired
 	public PedidoService service;
 	
+	/** alterar pra pegar todos pedidos em um periodo*/
 	@GetMapping
 	public List<Pedido> findAll(){
 		return service.findAll();
@@ -36,10 +37,9 @@ public class PedidoResource {
 		return (obj!=null) ? ResponseEntity.ok(obj) : 
 			ResponseEntity.notFound().build();
 	} 
-	
+	/* acredito que nao seja necessario */
 	@PutMapping("/{id}")
-	public ResponseEntity<Pedido> findById(@PathVariable String id, 
-											@RequestBody Pedido p){
+	public ResponseEntity<Pedido> findById(@PathVariable String id, @RequestBody Pedido p){
 		p.setId(id);
 		p=service.update(p);
 		return ResponseEntity.noContent().build();

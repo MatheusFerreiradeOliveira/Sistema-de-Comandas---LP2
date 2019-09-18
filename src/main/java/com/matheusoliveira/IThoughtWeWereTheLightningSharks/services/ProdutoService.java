@@ -19,7 +19,7 @@ public class ProdutoService {
 	}
 	
 	public Produto findById(String id) {
-		return repository.findOne(id);
+		return getOne(id);
 	}
 	
 	public Produto getOne(String id) {
@@ -43,7 +43,6 @@ public class ProdutoService {
 	public void change(Produto p1, Produto p2) {
 		p1.setNome(p2.getNome());
 		p1.setPeso(p2.isPeso());
-		p1.setQtd(p2.getQtd());
 		p1.setValor(p2.getValor());
 	}
 	

@@ -44,8 +44,8 @@ public class CompraResource {
 	@GetMapping("/{id}/pedidos")
 	public ResponseEntity<List<Pedido>> findPedidosById(@PathVariable String id){
 		Compra obj=serviceCompra.findById(id);
-		List<Pedido> lul = obj.getPedidos();
-		return (obj!=null) ? ResponseEntity.ok(lul) : 
+		List<Pedido> pedidos = obj.getPedidos();
+		return (obj!=null) ? ResponseEntity.ok(pedidos) : 
 			ResponseEntity.notFound().build();
 	} 
 	

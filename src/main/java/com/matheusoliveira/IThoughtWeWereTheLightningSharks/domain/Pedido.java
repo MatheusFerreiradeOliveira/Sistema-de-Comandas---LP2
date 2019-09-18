@@ -8,25 +8,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Pedido {
 	@Id
-	String id;
-	int qtdItens;
-	float valor;
-	Date hora;
-	String obs;
-	Produto produto;
+	private String id;
+	private int qtdItens;
+	private double valorTotal;
+	private double peso;
+	private Date hora;
+	private String obs;
+	private Produto produto;
 
 	public Pedido() {};
 	
-	public Pedido(String id, int qtdItens, float valor, Date hora, String obs, Produto produto) {
+	public Pedido(String id, int qtdItens, double valorTotal, double peso, Date hora, String obs, Produto produto) {
 		super();
 		this.id = id;
 		this.qtdItens = qtdItens;
-		this.valor = valor;
+		this.peso = peso;
+		this.valorTotal = valorTotal;
 		this.hora = hora;
 		this.obs = obs;
 		this.produto = produto;
 	}
-
+	/*getters and setters*/
 	public String getId() {
 		return id;
 	}
@@ -39,11 +41,28 @@ public class Pedido {
 	public void setQtdItens(int qtdItens) {
 		this.qtdItens = qtdItens;
 	}
-	public float getValor() {
-		return valor;
+	
+	public double getValorTotal() {
+		return valorTotal;
 	}
-	public void setValor(float valor) {
-		this.valor = valor;
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
+	public double getvalorTotal() {
+		return valorTotal;
+	}
+	public void setvalorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 	public Date getHora() {
 		return hora;
