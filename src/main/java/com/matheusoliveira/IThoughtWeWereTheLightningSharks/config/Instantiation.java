@@ -1,7 +1,13 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.config;
 
 import java.text.SimpleDateFormat;
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+>>>>>>> 17f6ab0b21e343d35cb3d77e9dc0881f7a470aa7
 import java.util.Arrays;
+import java.util.List;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +24,12 @@ public class Instantiation implements CommandLineRunner {
 
 	@Autowired
 	public ProdutoRepository produtoRepository;
+	@Autowired
+	public CompraRepository compraRepository;
+	
+	@Autowired
+	public PedidoRepository pedidoRepository;
+	
 	@Autowired
 	public CompraRepository compraRepository;
 	
