@@ -5,22 +5,23 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection="Compras")
 public class Compra {
 	@Id
 	private String id;
 	private Date abertura;
 	private Date encerramento;
-	private Double cartao;
-	private Double dinheiro;
-	
+	private double cartao;
+	private double dinheiro;
+	@DBRef
 	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Compra() {};
 
-	public Compra(String id, Date abertura, Date encerramento, Double cartao, Double dinheiro,
+	public Compra(String id, Date abertura, Date encerramento, double cartao, Double dinheiro,
 			List<Pedido> pedidos) {
 		super();
 		this.id = id;
@@ -50,10 +51,10 @@ public class Compra {
 	public void setEncerramento(Date encerramento) {
 		this.encerramento = encerramento;
 	}
-	public Double getCartao() {
+	public double getCartao() {
 		return cartao;
 	}
-	public void setCartao(Double cartao) {
+	public void setCartao(double cartao) {
 		this.cartao = cartao;
 	}
 	public Double getDinheiro() {

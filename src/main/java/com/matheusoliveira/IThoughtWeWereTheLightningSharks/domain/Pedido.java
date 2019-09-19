@@ -5,12 +5,12 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="pedido")
+@Document(collection="pedidos")
 public class Pedido {
 	@Id
 	private String id;
 	private int qtdItens;
-	private double valorTotal;
+	private double total;
 	private double peso;
 	private Date hora;
 	private String obs;
@@ -18,12 +18,12 @@ public class Pedido {
 
 	public Pedido() {};
 	
-	public Pedido(String id, int qtdItens, double valorTotal, double peso, Date hora, String obs, Produto produto) {
+	public Pedido(String id, int qtdItens, double total, double peso, Date hora, String obs, Produto produto) {
 		super();
 		this.id = id;
 		this.qtdItens = qtdItens;
 		this.peso = peso;
-		this.valorTotal = valorTotal;
+		this.total = total;
 		this.hora = hora;
 		this.obs = obs;
 		this.produto = produto;
@@ -42,12 +42,12 @@ public class Pedido {
 		this.qtdItens = qtdItens;
 	}
 	
-	public double getValorTotal() {
-		return valorTotal;
+	public double getTotal() {
+		return total;
 	}
 
-	public void setValorTotal(double valorTotal) {
-		this.valorTotal = valorTotal;
+	public void setTotal(double total) {
+		this.total = total;
 	}
 
 	public double getPeso() {
@@ -58,12 +58,6 @@ public class Pedido {
 		this.peso = peso;
 	}
 
-	public double getvalorTotal() {
-		return valorTotal;
-	}
-	public void setvalorTotal(double valorTotal) {
-		this.valorTotal = valorTotal;
-	}
 	public Date getHora() {
 		return hora;
 	}

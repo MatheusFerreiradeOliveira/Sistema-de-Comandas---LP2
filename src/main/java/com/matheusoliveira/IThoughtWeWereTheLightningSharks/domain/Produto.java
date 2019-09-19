@@ -12,12 +12,12 @@ public class Produto implements Serializable{
 	@Id
 	private String id;
 	private String nome;
-	private Double valor;
+	private double valor;
 	private boolean peso;
 	
 	public Produto() {}
 	
-	public Produto(String id, String nome, Double valor,  boolean peso) {
+	public Produto(String id, String nome, double valor,  boolean peso) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -37,10 +37,10 @@ public class Produto implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Double getValor() {
+	public double getValor() {
 		return valor;
 	}
-	public void setValor(Double valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	public boolean isPeso() {
