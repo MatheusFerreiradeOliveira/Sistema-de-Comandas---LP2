@@ -20,12 +20,12 @@ public class CompraDTO implements Serializable{
 	private double cartao;
 	private double dinheiro;
 	@DBRef
-	private List<String> pedidos = new ArrayList<>();
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public CompraDTO() {};
 	
 	public CompraDTO(String id, Date abertura, Date encerramento, double cartao, Double dinheiro,
-			List<String> pedidos) {
+			List<Pedido> pedidos) {
 		super();
 		this.id = id;
 		this.abertura = abertura;
@@ -38,7 +38,6 @@ public class CompraDTO implements Serializable{
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -46,7 +45,6 @@ public class CompraDTO implements Serializable{
 	public Date getAbertura() {
 		return abertura;
 	}
-
 	public void setAbertura(Date abertura) {
 		this.abertura = abertura;
 	}
@@ -54,7 +52,6 @@ public class CompraDTO implements Serializable{
 	public Date getEncerramento() {
 		return encerramento;
 	}
-
 	public void setEncerramento(Date encerramento) {
 		this.encerramento = encerramento;
 	}
@@ -62,7 +59,6 @@ public class CompraDTO implements Serializable{
 	public double getCartao() {
 		return cartao;
 	}
-
 	public void setCartao(double cartao) {
 		this.cartao = cartao;
 	}
@@ -70,17 +66,22 @@ public class CompraDTO implements Serializable{
 	public double getDinheiro() {
 		return dinheiro;
 	}
-
 	public void setDinheiro(double dinheiro) {
 		this.dinheiro = dinheiro;
 	}
 
-	public List<String> getPedidos() {
+	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
-
-	public void setPedidos(List<String> pedidos) {
+	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
+	public void insertPedido(Pedido p) {
+		this.pedidos.add(p);
+	}
+	public void insertAllPedido(List<Pedido> p) {
+		pedidos.addAll(p);
+	}
+
 	
 }

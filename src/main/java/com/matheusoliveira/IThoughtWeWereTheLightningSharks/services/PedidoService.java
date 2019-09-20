@@ -34,11 +34,15 @@ public class PedidoService {
 		
 	public Pedido insert(PedidoDTO p) {
 		Pedido pedido= new Pedido(p);
-		Produto produto= produtoRepository.findOne(p.getProduto());
-		if(produto == null) {
-			throw new ObjectNotFoundException("Objeto não encontrado"); 
+		if(p.getProduto()!=null) {
+			Produto produto= produtoRepository.findOne(p.getProduto());
+			if(produto == null) {
+				throw new ObjectNotFoundException("Objeto não encontrado"); 
+			}
+			pedido.setProduto(produto);
+		}else {
+			throw new ObjectNotFoundException("Objeto não encontrado: Não existe produto"); 
 		}
-		pedido.setProduto(produto);
 		return pedidoRepository.insert(pedido);
 	}
 	
@@ -49,13 +53,22 @@ public class PedidoService {
 	}
 	
 	public void change(Pedido p, PedidoDTO pDTO) {
-		p.setHora(pDTO.getHora());
-		p.setObs(pDTO.getObs());
-		p.setQtdItens(pDTO.getQtdItens());
-		p.setTotal(pDTO.getTotal());
-		Produto produto= produtoRepository.findOne(pDTO.getProduto());
-		if(produto == null) {
-			throw new ObjectNotFoundException("Objeto não encontrado"); 
+		if(pDTO.getHora()!=null)
+			p.setHora(pDTO.getHora());
+		if(pDTO.getObs()!=null)
+			p.setObs(pDTO.getObs());
+		if(pDTO.getQtdItens()!= 0)
+			p.setQtdItens(pDTO.getQtdItens());
+		if(pDTO.getTotal()!= 0)
+			p.setTotal(pDTO.getTotal());
+		Produto produto;
+		if(pDTO.getProduto()!=null) {
+			produto = produtoRepository.findOne(pDTO.getProduto());
+			if(produto == null) {
+				throw new ObjectNotFoundException("Objeto não encontrado"); 
+			}
+		}else {
+			throw new ObjectNotFoundException("Objeto não encontrado: Não existe produto");
 		}
 		p.setProduto(produto);
 	}

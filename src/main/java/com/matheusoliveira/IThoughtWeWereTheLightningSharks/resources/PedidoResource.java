@@ -40,7 +40,7 @@ public class PedidoResource {
 	} 
 	/* acredito que nao seja necessario */
 	@PutMapping("/{id}")
-	public ResponseEntity<Pedido> findById(@PathVariable String id, @RequestBody PedidoDTO p){
+	public ResponseEntity<Pedido> update(@PathVariable String id, @RequestBody PedidoDTO p){
 		p.setId(id);
 		Pedido pedido=service.update(p);
 		return ResponseEntity.noContent().build();

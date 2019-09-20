@@ -17,6 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.PedidoDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.CompraService;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.PedidoService;
 
@@ -50,7 +52,7 @@ public class CompraResource {
 	} 
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Compra> findById(@PathVariable String id, 
+	public ResponseEntity<Compra> update(@PathVariable String id, 
 											@RequestBody Compra p){
 		p.setId(id);
 		p=serviceCompra.update(p);
@@ -58,8 +60,8 @@ public class CompraResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody Compra p) {
-		Compra obj = serviceCompra.insert(p);
+	public ResponseEntity<Void> insert(@RequestBody CompraDTO compraDTO) {
+		Compra obj = serviceCompra.insert(compraDTO);
 		URI uri=ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
@@ -70,9 +72,9 @@ public class CompraResource {
 	
 	@PostMapping("/{id}/pedidos")
 	public ResponseEntity<Void> insertPedido(@PathVariable String id,
-												@RequestBody Pedido p) {
+												@RequestBody PedidoDTO p) {
 		Compra obj = serviceCompra.findById(id);
-		obj.insertPedido(p);
+		//obj.insertPedido(p);
 		
 		URI uri=ServletUriComponentsBuilder
 				.fromCurrentRequest()

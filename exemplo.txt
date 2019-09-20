@@ -39,8 +39,14 @@ COMPRA:[
 //PRODUTOS
 GET: 	/produtos
 GET: 	/produtos/asdqe930w1esd12a821po
-PUT: 	/produtos/asddqweqfqwnu9e9m139k
 DELETE: /produtos/asddqweqfqwnu9e9m139k
+PUT: 	/produtos/asddqweqfqwnu9e9m139k
+	body:
+	{
+		"nome": 	"Peixe frito",
+		"valor": 	35,
+		"peso": 	true,
+	}
 POST: 	/produtos
 	body:
 	{
@@ -53,8 +59,19 @@ POST: 	/produtos
 //PEDIDOS
 GET: 	/pedidos
 GET: 	/pedidos/asdqe930w1esd12a821po
-PUT: 	/pedidos/asddqweqfqwnu9e9m139k
 DELETE: /pedidos/asddqweqfqwnu9e9m139k
+PUT: 	/pedidos/asddqweqfqwnu9e9m139k
+	body:
+	{
+        
+        "qtdItens": 	1,
+        "total": 		35.0,
+        "peso": 		1.0,
+        "hora": 		1563636600000,
+        "obs": 			"sem espinas",
+        "produto": 		"5d841791e543dd2d78e1e25e"
+        
+    },
 POST: 	/pedidos
 	body:
 	{
@@ -64,12 +81,8 @@ POST: 	/pedidos
         "peso": 		1.0,
         "hora": 		1563636600000,
         "obs": 			"sem espinas",
-        "produto": {
-            "id": 		"5d841791e543dd2d78e1e25e",
-            "nome": 	"Peixe frito",
-            "valor": 	35.0,
-            "peso": 	true
-        }
+        "produto": 		"5d841791e543dd2d78e1e25e"
+        
     },
 
 /*-----------------------------------------------------------*/

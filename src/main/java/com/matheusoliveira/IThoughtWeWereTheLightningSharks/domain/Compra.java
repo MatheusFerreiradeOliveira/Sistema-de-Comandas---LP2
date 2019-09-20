@@ -19,12 +19,12 @@ public class Compra {
 	private double cartao;
 	private double dinheiro;
 	@DBRef
-	private List<Pedido> pedidos = new ArrayList<>();
+	private List<String> pedidos = new ArrayList<>();
 
 	public Compra() {};
 	
 	public Compra(String id, Date abertura, Date encerramento, double cartao, Double dinheiro,
-			List<Pedido> pedidos) {
+			List<String> pedidos) {
 		super();
 		this.id = id;
 		this.abertura = abertura;
@@ -78,16 +78,16 @@ public class Compra {
 		this.dinheiro = dinheiro;
 	}
 	
-	public List<Pedido> getPedidos() {
+	public List<String> getPedidos() {
 		return pedidos;
 	}
-	public void setPedidos(List<Pedido> pedidos) {
+	public void setPedidos(List<String> pedidos) {
 		this.pedidos = pedidos;
 	}
-	public void insertPedido(Pedido p) {
+	public void insertPedido(String p) {
 		this.pedidos.add(p);
 	}
-	public void insertAllPedido(List<Pedido> p) {
+	public void insertAllPedido(List<String> p) {
 		pedidos.addAll(p);
 	}
 
