@@ -9,10 +9,14 @@ import org.springframework.context.annotation.Configuration;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Permissoes;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Produto;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Usuario;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.CompraRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.PedidoRepository;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.PermissoesRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.ProdutoRepository;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.UsuarioRepository;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {
@@ -25,6 +29,12 @@ public class Instantiation implements CommandLineRunner {
 	
 	@Autowired
 	public CompraRepository compraRepository;
+	
+	@Autowired
+	public UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	public PermissoesRepository permissoesRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -45,6 +55,23 @@ public class Instantiation implements CommandLineRunner {
 		Compra c1=new Compra(null, sdf.parse("2019-07-20 12:30:00"),
 				sdf.parse("2019-07-20 16:45:00"), 0.0, 43.0, Arrays.asList(pedido1,pedido2) );
 		compraRepository.save(c1);
+		
+		//Lista de permissoes
+		
+		Permissoes per1 = new Permissoes(null, "Adicionar mesas");
+		Permissoes per2 = new Permissoes(null, "Inserir produto");
+		Permissoes per3 = new Permissoes(null, "Realizar pedido");
+		Permissoes per4 = new Permissoes(null, "Listar compras");
+		
+		permissoesRepository.save(Arrays.asList(per1, per2, per3, per4));
+		
+		//Listar users
+		
+		Usuario user1 = new Usuario(null, "Joaquin", Arrays.asList(per1, per2, per3, per4));
+		Usuario user2 = new Usuario(null, "Garçoneide", Arrays.asList(per3));
+		
+		usuarioRepository.save(Arrays.asList(user1, user2));
+		
 		
 	}
 
