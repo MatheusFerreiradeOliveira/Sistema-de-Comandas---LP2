@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="Compras")
+@Document(collection="compras")
 public class Compra {
 	@Id
 	private String id;
@@ -20,7 +20,7 @@ public class Compra {
 	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Compra() {};
-
+	
 	public Compra(String id, Date abertura, Date encerramento, double cartao, Double dinheiro,
 			List<Pedido> pedidos) {
 		super();

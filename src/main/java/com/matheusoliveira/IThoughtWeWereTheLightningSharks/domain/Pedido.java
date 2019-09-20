@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.PedidoDTO;
+
 @Document(collection="pedidos")
 public class Pedido {
 	@Id
@@ -28,6 +30,16 @@ public class Pedido {
 		this.obs = obs;
 		this.produto = produto;
 	}
+	
+	public Pedido(PedidoDTO pedidoDTO) {
+		this.id=pedidoDTO.getId();
+		this.qtdItens=pedidoDTO.getQtdItens();
+		this.total=pedidoDTO.getTotal();
+		this.peso=pedidoDTO.getPeso();
+		this.hora=pedidoDTO.getHora();
+		this.obs=pedidoDTO.getObs();
+	}
+	
 	/*getters and setters*/
 	public String getId() {
 		return id;

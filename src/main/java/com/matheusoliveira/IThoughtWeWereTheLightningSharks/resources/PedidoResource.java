@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.PedidoDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.PedidoService;
 
 @RestController
@@ -39,14 +40,14 @@ public class PedidoResource {
 	} 
 	/* acredito que nao seja necessario */
 	@PutMapping("/{id}")
-	public ResponseEntity<Pedido> findById(@PathVariable String id, @RequestBody Pedido p){
+	public ResponseEntity<Pedido> findById(@PathVariable String id, @RequestBody PedidoDTO p){
 		p.setId(id);
-		p=service.update(p);
+		Pedido pedido=service.update(p);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody Pedido p) {
+	public ResponseEntity<Void> insert(@RequestBody PedidoDTO p) {
 		Pedido obj = service.insert(p);
 		URI uri=ServletUriComponentsBuilder
 				.fromCurrentRequest()
