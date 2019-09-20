@@ -16,7 +16,7 @@ public class Pedido {
 	private double peso;
 	private Date hora;
 	private String obs;
-	private Produto produto;
+	private Produto produto= new Produto();
 
 	public Pedido() {};
 	
@@ -32,7 +32,6 @@ public class Pedido {
 	}
 	
 	public Pedido(PedidoDTO pedidoDTO) {
-		this.id=pedidoDTO.getId();
 		this.qtdItens=pedidoDTO.getQtdItens();
 		this.total=pedidoDTO.getTotal();
 		this.peso=pedidoDTO.getPeso();
@@ -115,4 +114,11 @@ public class Pedido {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", qtdItens=" + qtdItens + ", total=" + total + ", peso=" + peso + ", hora=" + hora
+				+ ", obs=" + obs + ", produto=" + produto.toString() + "]";
+	}
+	
 }

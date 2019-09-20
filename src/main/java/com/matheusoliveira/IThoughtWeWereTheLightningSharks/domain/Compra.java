@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
+
 @Document(collection="compras")
 public class Compra {
 	@Id
@@ -31,7 +33,15 @@ public class Compra {
 		this.dinheiro = dinheiro;
 		this.pedidos = pedidos;
 	}
-	
+	public Compra(CompraDTO compra) {
+		super();
+		this.id = compra.getId();
+		this.abertura = compra.getAbertura();
+		this.encerramento = compra.getEncerramento();
+		this.cartao = compra.getCartao();
+		this.dinheiro = compra.getDinheiro();
+	}
+		
 	/*getters and setters*/
 	public String getId() {
 		return id;
@@ -39,24 +49,28 @@ public class Compra {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	public Date getAbertura() {
 		return abertura;
 	}
 	public void setAbertura(Date abertura) {
 		this.abertura = abertura;
 	}
+	
 	public Date getEncerramento() {
 		return encerramento;
 	}
 	public void setEncerramento(Date encerramento) {
 		this.encerramento = encerramento;
 	}
+	
 	public double getCartao() {
 		return cartao;
 	}
 	public void setCartao(double cartao) {
 		this.cartao = cartao;
 	}
+	
 	public Double getDinheiro() {
 		return dinheiro;
 	}
@@ -67,13 +81,14 @@ public class Compra {
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
-
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-	
 	public void insertPedido(Pedido p) {
 		this.pedidos.add(p);
+	}
+	public void insertAllPedido(List<Pedido> p) {
+		pedidos.addAll(p);
 	}
 
 	@Override

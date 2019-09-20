@@ -19,10 +19,6 @@ public class ProdutoService {
 	}
 	
 	public Produto findById(String id) {
-		return getOne(id);
-	}
-	
-	public Produto getOne(String id) {
 		Produto p = repository.findOne(id);
 		if(p==null) {
 			throw new ObjectNotFoundException("Objeto não encontrado");  
@@ -35,7 +31,7 @@ public class ProdutoService {
 	}
 	
 	public Produto update(Produto p) {
-		Produto obj = getOne(p.getId());
+		Produto obj = findById(p.getId());
 		change(obj, p);
 		return repository.save(obj);
 	}

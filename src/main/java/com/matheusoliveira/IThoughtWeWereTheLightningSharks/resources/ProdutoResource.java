@@ -1,3 +1,4 @@
+
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.resources;
 
 import java.net.URI;
