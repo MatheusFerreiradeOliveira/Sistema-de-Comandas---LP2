@@ -1,0 +1,81 @@
+/*-----------------------------------------------------------*/
+//EXEMPLO
+COMPRA:[
+    {
+        id:dkf8384hiudna929g9139rjf,
+        mesa: "A",
+        horaAbertura:'08:10 12/10/2019',
+        horaEncerramento:'10:00 12/10/2019',
+        cartao: 0.0,
+        dinheiro: 10.0,
+        PEDIDO:[
+            {
+                id:98es1284cnu98ze2h77,
+                idProduto: 1,
+                desc:"peixe e farinha",
+                valorUnit:null,
+                valorPeso:10.00,
+                qtd:10,
+                valor:  100.00,
+                hora:'08:10 12/10/2019', 
+                obs:"com macaxeira", 
+            },
+            {
+                id:98es1284cnu98ze2h77,
+                idProduto: 2,
+                desc:"refri 2l",
+                valorUnit:3.50,
+                valorPeso:null,
+                qtd:2,
+                valor: 7.00,
+                hora:'08:10 12/10/2019',
+                obs:null,
+            },
+        ]
+    },  
+],
+// localhost:8082
+/*-----------------------------------------------------------*/
+//PRODUTOS
+GET: 	/produtos
+GET: 	/produtos/asdqe930w1esd12a821po
+PUT: 	/produtos/asddqweqfqwnu9e9m139k
+DELETE: /produtos/asddqweqfqwnu9e9m139k
+POST: 	/produtos
+	body:
+	{
+		"nome": 	"Peixe frito",
+		"valor": 	35,
+		"peso": 	true,
+	}
+
+/*-----------------------------------------------------------*/
+//PEDIDOS
+GET: 	/pedidos
+GET: 	/pedidos/asdqe930w1esd12a821po
+PUT: 	/pedidos/asddqweqfqwnu9e9m139k
+DELETE: /pedidos/asddqweqfqwnu9e9m139k
+POST: 	/pedidos
+	body:
+	{
+        
+        "qtdItens": 	1,
+        "total": 		35.0,
+        "peso": 		1.0,
+        "hora": 		1563636600000,
+        "obs": 			"sem espinas",
+        "produto": {
+            "id": 		"5d841791e543dd2d78e1e25e",
+            "nome": 	"Peixe frito",
+            "valor": 	35.0,
+            "peso": 	true
+        }
+    },
+
+/*-----------------------------------------------------------*/
+//COMPRAS
+
+
+/*-----------------------------------------------------------*/
+//USUARIOS
+
