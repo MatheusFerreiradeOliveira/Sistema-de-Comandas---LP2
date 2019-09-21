@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
 
 public class CompraDTO implements Serializable{
@@ -33,6 +34,14 @@ public class CompraDTO implements Serializable{
 		this.cartao = cartao;
 		this.dinheiro = dinheiro;
 		this.pedidos = pedidos;
+	}
+	public CompraDTO(Compra compra) {
+		super();
+		this.id = compra.getId();
+		this.abertura = compra.getAbertura();
+		this.encerramento = compra.getEncerramento();
+		this.cartao = compra.getCartao();
+		this.dinheiro = compra.getDinheiro();
 	}
 	
 	public String getId() {

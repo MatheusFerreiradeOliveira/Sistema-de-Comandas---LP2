@@ -25,17 +25,17 @@ import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.PedidoServi
 @RestController
 @RequestMapping("/compras")
 public class CompraResource {
-	@Autowired
-	public CompraService serviceCompra;
 	
-	@Autowired
+	public CompraService compraService;
+	
+	
 	public PedidoService servicePedido;
 	
 	@GetMapping
-	public List<Compra> findAll(){
-		return serviceCompra.findAll();
+	public List<CompraDTO> findAll(){
+		return compraService.findAll();
 	} 
-	
+	/*
 	@GetMapping("/{id}")
 	public ResponseEntity<Compra> findById(@PathVariable String id){
 		Compra obj=serviceCompra.findById(id);
@@ -89,5 +89,5 @@ public class CompraResource {
 		serviceCompra.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
-
+*/
 }

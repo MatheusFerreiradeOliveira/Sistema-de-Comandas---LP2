@@ -1,22 +1,41 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.CompraRepository;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.PedidoRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.exception.ObjectNotFoundException;
 
 @Service
 public class CompraService {
 	@Autowired
 	public CompraRepository repository;
+	@Autowired
+	public PedidoRepository pedidoRepository;
 	
-	public List<Compra> findAll(){
-		return repository.findAll();
+	public List<CompraDTO> findAll(){
+		List<Compra> compras= repository.findAll();
+		List<CompraDTO> obj= new ArrayList<>();
+		for(Compra c:compras) {
+			CompraDTO dto = new CompraDTO(c);
+			List<String> pedidosString= c.getPedidos();
+			for(String p: pedidosString) {
+				Pedido pedido=pedidoRepository.findOne(p);
+				if(pedido==null) {
+					throw new ObjectNotFoundException("Objeto não encontrado");  
+				}
+				dto.insertPedido(pedido);
+			}
+			obj.add(dto);
+		}
+		return obj;
 	}
 	
 	public Compra findById(String id) {
@@ -30,10 +49,8 @@ public class CompraService {
 	
 	public Compra insert(CompraDTO compraDTO) {
 		Compra compra=new Compra(compraDTO);
-		List<String> pedidos= compraDTO.getPedidos();
-		for(int i=0;i<pedidos.size();++i) {
-			
-		}
+		//List<String> pedidos= compraDTO.getPedidos();
+		
 		return repository.insert(compra);
 	}
 	

@@ -53,7 +53,7 @@ public class Instantiation implements CommandLineRunner {
 		Pedido pedido2=new Pedido(null, 2, 7.0, 0, sdf.parse("2019-07-20 12:45:00"), "", p4);
 		pedidoRepository.save(Arrays.asList(pedido1,pedido2));
 		Compra c1=new Compra(null, sdf.parse("2019-07-20 12:30:00"),
-				sdf.parse("2019-07-20 16:45:00"), 0.0, 43.0, Arrays.asList(pedido1,pedido2) );
+				sdf.parse("2019-07-20 16:45:00"), 0.0, 43.0, Arrays.asList(pedido1.getId(),pedido2.getId()) );
 		compraRepository.save(c1);
 		
 		//Lista de permissoes
