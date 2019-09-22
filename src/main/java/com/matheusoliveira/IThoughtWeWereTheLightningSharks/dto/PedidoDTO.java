@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
+
 public class PedidoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -16,6 +18,7 @@ public class PedidoDTO implements Serializable{
 	private Date hora;
 	private String obs;
 	private String produto;
+	
 	PedidoDTO(){}
 	public PedidoDTO(String id, int qtdItens, double total,
 			double peso, Date hora, String obs, String produto) {
@@ -28,7 +31,16 @@ public class PedidoDTO implements Serializable{
 		this.obs = obs;
 		this.produto = produto;
 	}
-	
+	public PedidoDTO(Pedido pedido) {
+		super();
+		this.id = pedido.getId();
+		this.qtdItens = pedido.getQtdItens();
+		this.total = pedido.getTotal();
+		this.peso = pedido.getPeso();
+		this.hora = pedido.getHora();
+		this.obs = pedido.getObs();
+		this.produto = pedido.getProduto().getId();
+	}
 	public String getId() {
 		return id;
 	}

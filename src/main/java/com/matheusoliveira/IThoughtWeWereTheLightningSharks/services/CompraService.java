@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Produto;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.CompraRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.PedidoRepository;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.ProdutoRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.exception.ObjectNotFoundException;
 
 @Service
@@ -19,6 +21,8 @@ public class CompraService {
 	public CompraRepository compraRepository;
 	@Autowired
 	public PedidoRepository pedidoRepository;
+	@Autowired
+	public ProdutoRepository produtoRepository;
 	
 	public List<CompraDTO> findAll(){
 		List<Compra> compras= compraRepository.findAll();
@@ -49,14 +53,34 @@ public class CompraService {
 		return dto;
 	}
 	
-	/*
+	
 	public Compra insert(CompraDTO compraDTO) {
 		Compra compra=new Compra(compraDTO);
-		//List<String> pedidos= compraDTO.getPedidos();
-		
-		return repository.insert(compra);
+		List<Pedido> pedidos= compraDTO.getPedidos();
+		for(Pedido pedido : pedidos) {
+			/** caso nao tenha produto, caso ele nao exista, caso os valores sejam difentes*/
+			if(pedido.getProduto()== null) {
+				throw new ObjectNotFoundException("Objeto não encontrado: Não existe produto"); 
+			}
+			String produtoId= pedido.getProduto().getId();
+			Produto produto = produtoRepository.findOne(produtoId);
+			if(produto == null) {
+				throw new ObjectNotFoundException("Objeto não encontrado"); 
+			}/* acho que nao é necessario este if */
+			if(pedido.getProduto().getNome() != null) {
+				if(pedido.getProduto().getNome().compareTo(produto.getNome())!=0) {
+					System.out.println(pedido.getProduto().getNome()+" \n"+produto.getNome()+"\n"+
+							pedido.getProduto().getNome().compareTo(produto.getNome()));
+					throw new ObjectNotFoundException("Produto não se refere ao encontrado no BD"); 
+				}
+			}
+			pedido.setProduto(produto);
+			pedido = pedidoRepository.insert(pedido);
+			compra.insertPedido(pedido.getId());
+		}
+		return compraRepository.insert(compra);
 	}
-	
+	/*
 	public Compra update(Compra p) {
 		Compra obj = findById(p.getId());
 		change(obj, p);
