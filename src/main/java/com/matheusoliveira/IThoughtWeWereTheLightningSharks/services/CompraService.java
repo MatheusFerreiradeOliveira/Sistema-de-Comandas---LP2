@@ -16,21 +16,18 @@ import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.exception.O
 @Service
 public class CompraService {
 	@Autowired
-	public CompraRepository repository;
+	public CompraRepository compraRepository;
 	@Autowired
 	public PedidoRepository pedidoRepository;
 	
 	public List<CompraDTO> findAll(){
-		List<Compra> compras= repository.findAll();
+		List<Compra> compras= compraRepository.findAll();
 		List<CompraDTO> obj= new ArrayList<>();
-		for(Compra c:compras) {
+		for(Compra c : compras) {
 			CompraDTO dto = new CompraDTO(c);
 			List<String> pedidosString= c.getPedidos();
-			for(String p: pedidosString) {
-				Pedido pedido=pedidoRepository.findOne(p);
-				if(pedido==null) {
-					throw new ObjectNotFoundException("Objeto não encontrado");  
-				}
+			for(String pId : pedidosString) {
+				Pedido pedido=pedidoRepository.findOne(pId);
 				dto.insertPedido(pedido);
 			}
 			obj.add(dto);
@@ -38,15 +35,21 @@ public class CompraService {
 		return obj;
 	}
 	
-	public Compra findById(String id) {
-		Compra p = repository.findOne(id);
-		if(p==null) {
+	public CompraDTO findById(String id) {
+		Compra obj  = compraRepository.findOne(id);
+		if(obj==null) {
 			throw new ObjectNotFoundException("Objeto não encontrado");  
 		}
-		return p;
+		CompraDTO dto = new CompraDTO(obj);
+		List<String> pedidos= obj.getPedidos();
+		for(String pId : pedidos) {
+			Pedido pedido = pedidoRepository.findOne(pId);
+			dto.insertPedido(pedido);
+		}
+		return dto;
 	}
 	
-	
+	/*
 	public Compra insert(CompraDTO compraDTO) {
 		Compra compra=new Compra(compraDTO);
 		//List<String> pedidos= compraDTO.getPedidos();
@@ -71,4 +74,5 @@ public class CompraService {
 	public void deleteById(String id) {
 		repository.delete(id);
 	}
+	*/
 }

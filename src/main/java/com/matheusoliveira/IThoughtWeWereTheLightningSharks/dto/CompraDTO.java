@@ -25,8 +25,8 @@ public class CompraDTO implements Serializable{
 
 	public CompraDTO() {};
 	
-	public CompraDTO(String id, Date abertura, Date encerramento, double cartao, Double dinheiro,
-			List<Pedido> pedidos) {
+	public CompraDTO(String id, Date abertura, Date encerramento, 
+			double cartao, Double dinheiro, List<Pedido> pedidos) {
 		super();
 		this.id = id;
 		this.abertura = abertura;
@@ -35,6 +35,7 @@ public class CompraDTO implements Serializable{
 		this.dinheiro = dinheiro;
 		this.pedidos = pedidos;
 	}
+	
 	public CompraDTO(Compra compra) {
 		super();
 		this.id = compra.getId();
@@ -92,5 +93,11 @@ public class CompraDTO implements Serializable{
 		pedidos.addAll(p);
 	}
 
+	@Override
+	public String toString() {
+		return "CompraDTO [id=" + id + ", abertura=" + abertura + ", encerramento=" + encerramento + ", cartao="
+				+ cartao + ", dinheiro=" + dinheiro + ", pedidos=" + pedidos + "]";
+	}
+	
 	
 }

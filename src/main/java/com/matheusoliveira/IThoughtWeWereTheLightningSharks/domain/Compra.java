@@ -18,7 +18,6 @@ public class Compra {
 	private Date encerramento;
 	private double cartao;
 	private double dinheiro;
-	@DBRef
 	private List<String> pedidos = new ArrayList<>();
 
 	public Compra() {};
@@ -114,5 +113,11 @@ public class Compra {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Compra [id=" + id + ", abertura=" + abertura + ", encerramento=" + encerramento + ", cartao=" + cartao
+				+ ", dinheiro=" + dinheiro + ", pedidos=" + pedidos + "]";
 	}
 }
