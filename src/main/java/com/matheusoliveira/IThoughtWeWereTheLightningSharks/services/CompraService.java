@@ -115,23 +115,33 @@ public class CompraService {
 		}
 		return produto;
 	}
-	/*
-	public Compra update(Compra p) {
-		Compra obj = findById(p.getId());
-		change(obj, p);
-		return repository.save(obj);
+	
+	public Compra update(Compra compra) {
+		CompraDTO compraDTO = findById(compra.getId());
+		change(compra, compraDTO);
+		return compraRepository.save(compra);
 	}
 	
-	public void change(Compra p1, Compra p2) {
-		p1.setDinheiro(p2.getDinheiro());
-		p1.setCartao(p2.getCartao());
-		p1.setAbertura(p2.getAbertura());
-		p1.setEncerramento(p2.getEncerramento());
-		p1.setPedidos(p2.getPedidos());
+	public void change(Compra compra, CompraDTO compraDTO) {
+		if(compra.getDinheiro()==0.0)
+			compra.setDinheiro(compraDTO.getDinheiro());
+		if(compra.getCartao()==0.0)
+			compra.setCartao(compraDTO.getCartao());
+		if(compra.getAbertura()==null)
+			compra.setAbertura(compraDTO.getAbertura());
+		if(compra.getEncerramento()==null)
+			compra.setEncerramento(compraDTO.getEncerramento());
+		for(Pedido p : compraDTO.getPedidos()) {
+			compra.insertPedido(p.getId());
+		}
 	}
 	
 	public void deleteById(String id) {
-		repository.delete(id);
+		List<Pedido> pedidos = findPedidoById(id);
+		compraRepository.delete(id);
+		for(Pedido p : pedidos) {
+			pedidoRepository.delete(p.getId());
+		}
 	}
-	*/
+	
 }

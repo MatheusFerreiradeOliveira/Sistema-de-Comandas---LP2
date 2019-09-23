@@ -42,7 +42,8 @@ public class PedidoResource {
 	@PutMapping("/{id}")
 	public ResponseEntity<Pedido> update(@PathVariable String id, @RequestBody PedidoDTO p){
 		p.setId(id);
-		Pedido pedido=service.update(p);
+		//Pedido pedido=service.update(p);
+		service.update(p);
 		return ResponseEntity.noContent().build();
 	}
 	
