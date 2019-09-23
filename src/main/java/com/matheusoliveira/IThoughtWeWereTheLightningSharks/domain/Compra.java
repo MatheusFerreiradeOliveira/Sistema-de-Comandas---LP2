@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
@@ -40,7 +39,6 @@ public class Compra {
 		this.cartao = compra.getCartao();
 		this.dinheiro = compra.getDinheiro();
 	}
-		
 	/*getters and setters*/
 	public String getId() {
 		return id;

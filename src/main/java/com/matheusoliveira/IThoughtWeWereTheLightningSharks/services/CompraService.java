@@ -10,6 +10,7 @@ import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Produto;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.PedidoDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.CompraRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.PedidoRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.ProdutoRepository;
@@ -53,32 +54,66 @@ public class CompraService {
 		return dto;
 	}
 	
-	
 	public Compra insert(CompraDTO compraDTO) {
 		Compra compra=new Compra(compraDTO);
 		List<Pedido> pedidos= compraDTO.getPedidos();
 		for(Pedido pedido : pedidos) {
-			/** caso nao tenha produto, caso ele nao exista, caso os valores sejam difentes*/
-			if(pedido.getProduto()== null) {
-				throw new ObjectNotFoundException("Objeto não encontrado: Não existe produto"); 
-			}
-			String produtoId= pedido.getProduto().getId();
-			Produto produto = produtoRepository.findOne(produtoId);
-			if(produto == null) {
-				throw new ObjectNotFoundException("Objeto não encontrado"); 
-			}/* acho que nao é necessario este if */
-			if(pedido.getProduto().getNome() != null) {
-				if(pedido.getProduto().getNome().compareTo(produto.getNome())!=0) {
-					System.out.println(pedido.getProduto().getNome()+" \n"+produto.getNome()+"\n"+
-							pedido.getProduto().getNome().compareTo(produto.getNome()));
-					throw new ObjectNotFoundException("Produto não se refere ao encontrado no BD"); 
-				}
-			}
-			pedido.setProduto(produto);
-			pedido = pedidoRepository.insert(pedido);
+			pedido = savePedido(pedido);
 			compra.insertPedido(pedido.getId());
 		}
 		return compraRepository.insert(compra);
+	}
+	
+	public List<Pedido> findPedidoById(String id){
+		CompraDTO compraDTO = findById(id);
+		return compraDTO.getPedidos();
+	}
+	
+	public Compra insertNewPedido(String id, List<PedidoDTO> pedidosDTO) {
+		CompraDTO compraDTO = findById(id);
+		Compra compra = new Compra(compraDTO);
+		/* insere todos pedidos ja existentes */
+		for(Pedido p : compraDTO.getPedidos()) {
+			compra.insertPedido(p.getId());
+		}
+		/* insere todos novos pedidos */
+		for(PedidoDTO pDTO : pedidosDTO) {
+			/* usa produto aux pra procurar se é valido. obs: ele faz isso no momento de inserir*/
+			Produto produtoAux = new Produto();
+			produtoAux.setId(pDTO.getProduto());
+			Pedido pedido = new Pedido(pDTO);
+			pedido.setProduto(produtoAux);
+			/* salva os novos pedidos no bd*/
+			pedido = savePedido(pedido);
+			/* adiciona na lista de pedidos da compra*/
+			compra.insertPedido(pedido.getId());
+		}
+		return compraRepository.save(compra);
+	}
+	private Pedido savePedido(Pedido pedido) {
+		Produto produto= verifyProdutoExist(pedido);
+		pedido.setProduto(produto);
+		return pedidoRepository.insert(pedido);
+	}
+	
+	private Produto verifyProdutoExist(Pedido pedido) {
+		/** caso nao tenha produto, caso ele nao exista, caso os valores sejam difentes*/
+		if(pedido.getProduto()== null) {
+			throw new ObjectNotFoundException("Objeto não encontrado: Não existe produto"); 
+		}
+		String produtoId= pedido.getProduto().getId();
+		Produto produto = produtoRepository.findOne(produtoId);
+		if(produto == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado"); 
+		}/* verifica se os dados que ele passar for diferente do encontrado no banco*/
+		if(pedido.getProduto().getNome() != null) {
+			if(pedido.getProduto().getNome().compareTo(produto.getNome())!=0) {
+				System.out.println(pedido.getProduto().getNome()+" \n"+produto.getNome()+"\n"+
+						pedido.getProduto().getNome().compareTo(produto.getNome()));
+				throw new ObjectNotFoundException("Produto não se refere ao encontrado no BD"); 
+			}
+		}
+		return produto;
 	}
 	/*
 	public Compra update(Compra p) {
