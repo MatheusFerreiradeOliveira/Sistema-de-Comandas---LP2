@@ -23,6 +23,11 @@ public class Usuario {
 		this.permissoes = permissoes;
 	}
 
+	public Usuario(Usuario user) {
+		this.nome = user.nome;
+		this.permissoes = user.getPermissoes();
+	}
+
 	public String getId() {
 		return id;
 	}
