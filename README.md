@@ -2,12 +2,9 @@
 
 ## Requisições  
   
-  
-> Obs.: O atributo id é obrigatório para atualizar qualquer entidade. No caso da entidade de produto, além do id, também é obrigatório conter o atributo available.
-  
+> Obs.: O atributo id é obrigatório para atualizar qualquer entidade.
   
 #### Compras
-  
   
 | Método | Rota | Retorno |
 | --- | --- | --- |
@@ -29,14 +26,20 @@
 	"mesa":,"A",
 	"cartao": 0.0,
 	"dinheiro": 50.0,
-	"compras": [
+	"pedidos": [
 		{
 	 		"qtdItens": 1,
 	 		"total": 50.0,
 	 		"peso": false,
 	 		"hora": "AAAA-MM-DD HH:MM:SS",
 			"obs": "Sem sal",
-	 		"produto": "Peixe frito"
+	 		"produto": [
+				{
+					"nome": "Peixe frito",
+					"valor": 50.0,
+ 					"peso": false		
+				}
+			]
 		}
 	]
 }
@@ -44,8 +47,7 @@
 ```
 
 #### Pedidos
-  
-  
+    
 | Método | Rota | Retorno |
 | --- | --- | --- |
 | GET | `http://127.0.0.1:8082/pedidos` | Retorna todos os pedidos |
@@ -64,9 +66,16 @@
  	"peso": false,
 	"hora": "AAAA-MM-DD HH:MM:SS",
 	"obs": "Sem sal",
-	"produto": "Peixe frito"
+	"produto": [
+		{
+			"nome": "Peixe frito",
+			"valor": 50.0,
+ 			"peso": false		
+		}
+	]
 }
 ```
+
 #### Produtos
   
 | Método | Rota | Retorno |
