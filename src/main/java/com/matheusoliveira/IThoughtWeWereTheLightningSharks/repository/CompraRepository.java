@@ -11,8 +11,11 @@ import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 
 @Repository
 public interface CompraRepository extends MongoRepository<Compra, String> {
+	
+	/*
 	@Query("{ 'mesa' : {$regex: ?0, $options: 'i'}}")
 	List<Compra> searchByMesa(String mesa);
+	*/
 	
 	@Query("{ $and :[ "
 			+ "{'mesa' : {$regex: ?0, $options: 'i'}},"

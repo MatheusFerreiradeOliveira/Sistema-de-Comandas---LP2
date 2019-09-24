@@ -50,13 +50,16 @@ public class CompraResource {
 	public List<Pedido> findPedidosById(@PathVariable String id){
 		return compraService.findPedidoById(id);
 	} 
+	/*
 	@GetMapping("/mesasearch")
 	public ResponseEntity<List<Compra>> searchByMesa(@RequestParam(value="mesa", defaultValue="") String text){
 		text= URL.decodeParam(text);
 		List<Compra> obj=compraService.searchByMesa(text);
 		return (obj!=null) ? ResponseEntity.ok(obj) : 
 			ResponseEntity.notFound().build();
-	} 
+	}
+	*/
+	
 	@GetMapping("/search")
 	public ResponseEntity<List<Compra>> searchCompraByMesa(
 			@RequestParam(value="mesa", defaultValue="") String text,
@@ -82,25 +85,25 @@ public class CompraResource {
 	}
 	
 	
-	//@PutMapping("/{id}/pedidos")
-	@PostMapping("/{id}/pedidos")
+	@PutMapping("/{id}/pedidos")
+	//@PostMapping("/{id}/pedidos")
 	public ResponseEntity<Void> insertPedido(@PathVariable String id, @RequestBody List<PedidoDTO> list) {
 		Compra compra = compraService.insertNewPedido(id, list);
-		
+		/*
 		URI uri=ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
 				.buildAndExpand(compra.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
-		/*
-		return ResponseEntity.noContent().build();
 		*/
+		return ResponseEntity.noContent().build();
+		
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Compra> update(@PathVariable String id, 
-											@RequestBody Compra compra){
+	public ResponseEntity<Void> update(@PathVariable String id, 
+										@RequestBody Compra compra){
 		compra.setId(id);
 		compra=compraService.update(compra);
 		//System.out.println(compra.toString());

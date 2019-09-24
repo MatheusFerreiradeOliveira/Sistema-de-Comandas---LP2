@@ -26,9 +26,12 @@ public class CompraService {
 	@Autowired
 	public ProdutoRepository produtoRepository;
 	
+	/*
 	public List<Compra> searchByMesa(String mesa){
 		return compraRepository.searchByMesa(mesa);
 	}
+	*/
+	
 	public List<Compra> searchCompraByMesa(String mesa, Date minDate, Date maxDate){
 		maxDate= new Date(maxDate.getTime()+(24*60*60*1000));
 		return compraRepository.searchCompraByMesa(mesa, minDate, maxDate);

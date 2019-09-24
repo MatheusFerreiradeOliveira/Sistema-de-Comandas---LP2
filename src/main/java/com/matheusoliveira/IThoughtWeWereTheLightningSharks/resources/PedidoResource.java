@@ -1,6 +1,7 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.resources;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,19 @@ public class PedidoResource {
 	public ResponseEntity<List<Pedido>> findByTitle(@RequestParam(value="obs", defaultValue="") String text){
 		text= URL.decodeParam(text);
 		List<Pedido> obj=service.findByObs(text);
+		return (obj!=null) ? ResponseEntity.ok(obj) : 
+			ResponseEntity.notFound().build();
+	} 
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<Pedido>> searchCompraByMesa(
+			@RequestParam(value="produto", defaultValue="") String text,
+			@RequestParam(value="minate", defaultValue="") String minDate,
+			@RequestParam(value="maxDate", defaultValue="") String maxDate){
+		text= URL.decodeParam(text);
+		Date min =URL.convertDate(minDate, new Date(0L));
+		Date max =URL.convertDate(maxDate, new Date());
+		List<Pedido> obj=service.searchPedido(text, min, max);
 		return (obj!=null) ? ResponseEntity.ok(obj) : 
 			ResponseEntity.notFound().build();
 	} 

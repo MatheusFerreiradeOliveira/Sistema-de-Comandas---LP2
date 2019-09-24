@@ -1,5 +1,6 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ public class PedidoService {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	
+	public List<Pedido> searchPedido(String produto, Date minDate, Date maxDate){
+		maxDate= new Date(maxDate.getTime()+(24*60*60*1000));
+		return pedidoRepository.searchPedido(produto, minDate, maxDate);
+	}
 	
 	public List<Pedido> findAll(){
 		return pedidoRepository.findAll();
