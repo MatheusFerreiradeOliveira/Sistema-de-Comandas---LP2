@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | GET | `http://127.0.0.1:8082/compras` | Retorna todas as compras |
 | GET | `http://127.0.0.1:8082/compras/{ID}` | Retorna a compra com id passado no parâmetro |
-| GET | `http://127.0.0.1:8082/compras/{ID}/pedidos` | Retorna os compras da compra com id passado no parâmetro |
+| GET | `http://127.0.0.1:8082/compras/{ID}/pedidos` | Retorna os pedidos da compra com id passado no parâmetro |
 | GET | `http://127.0.0.1:8082/compras/search` | Retorna a lista de compras da mesa passada no filtro |
 | POST  | `http://127.0.0.1:8082/compras`  | Adiciona uma nova compra |
 | POST  | `http://127.0.0.1:8082/compras/{ID}/pedidos`  | Adiciona um novo pedido na compra com id passado no parâmetro |
