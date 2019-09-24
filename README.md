@@ -1,4 +1,4 @@
-# Aplicação de delivery para restaurantes
+# Sistema de Comandas
 
 ## Requisições  
   
@@ -11,11 +11,14 @@
   
 | Método | Rota | Retorno |
 | --- | --- | --- |
-| GET | `http://127.0.0.1:8080/admins` | Retorna todos os administradores |
-| GET | `http://127.0.0.1:8080/admins/{ID}` | Retorna o administrador com id passado no parâmetro |
-| POST  | `http://127.0.0.1:8080/admins`  | Retorna o administrador salvo com o ID  |
-| PATH  | `http://127.0.0.1:8080/admins`  | Retorna o administrador atualizado  |
-| DELETE  | `http://127.0.0.1:8080/admins/{ID}`  | Retorna uma string  |
+| GET | `http://127.0.0.1:8082/compras` | Retorna todos os administradores |
+| GET | `http://127.0.0.1:8082/compras/{ID}` | Retorna o administrador com id passado no parâmetro |
+| GET | `http://127.0.0.1:8082/compras/{ID}/pedidos` | Retorna o administrador com id passado no parâmetro |
+| GET | `http://127.0.0.1:8082/compras/mesasearch` | Retorna o administrador com id passado no parâmetro |
+| GET | `http://127.0.0.1:8082/compras/search` | Retorna o administrador com id passado no parâmetro |
+| POST  | `http://127.0.0.1:8082/compras`  | Retorna o administrador salvo com o ID  |
+| PATH  | `http://127.0.0.1:8082/compras`  | Retorna o administrador atualizado  |
+| DELETE  | `http://127.0.0.1:8082/compras/{ID}`  | Retorna uma string  |
   
   
 - Exemplo de JSON
