@@ -1,6 +1,7 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.resources;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -19,6 +21,7 @@ import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.PedidoDTO;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.resources.util.URL;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.CompraService;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.PedidoService;
 
@@ -46,6 +49,25 @@ public class CompraResource {
 	@GetMapping("/{id}/pedidos")
 	public List<Pedido> findPedidosById(@PathVariable String id){
 		return compraService.findPedidoById(id);
+	} 
+	@GetMapping("/mesasearch")
+	public ResponseEntity<List<Compra>> searchByMesa(@RequestParam(value="mesa", defaultValue="") String text){
+		text= URL.decodeParam(text);
+		List<Compra> obj=compraService.searchByMesa(text);
+		return (obj!=null) ? ResponseEntity.ok(obj) : 
+			ResponseEntity.notFound().build();
+	} 
+	@GetMapping("/search")
+	public ResponseEntity<List<Compra>> searchCompraByMesa(
+			@RequestParam(value="mesa", defaultValue="") String text,
+			@RequestParam(value="minate", defaultValue="") String minDate,
+			@RequestParam(value="maxDate", defaultValue="") String maxDate){
+		text= URL.decodeParam(text);
+		Date min =URL.convertDate(minDate, new Date(0L));
+		Date max =URL.convertDate(maxDate, new Date());
+		List<Compra> obj=compraService.searchCompraByMesa(text, min, max);
+		return (obj!=null) ? ResponseEntity.ok(obj) : 
+			ResponseEntity.notFound().build();
 	} 
 	
 	@PostMapping

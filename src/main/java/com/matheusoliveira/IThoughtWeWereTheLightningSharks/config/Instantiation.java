@@ -65,6 +65,7 @@ public class Instantiation implements CommandLineRunner {
 		Compra c1=new Compra(null, 
 				sdf.parse("2019-07-20 12:30:00"),
 				sdf.parse("2019-07-20 16:45:00"), 
+				"A",
 				0.0, 
 				43.0, 
 				pedidosSalvos
@@ -72,6 +73,7 @@ public class Instantiation implements CommandLineRunner {
 		Compra c2=new Compra(null, 
 				sdf.parse("2019-07-20 12:30:00"),
 				sdf.parse("2019-07-20 16:45:00"), 
+				"B",
 				0.0, 
 				43.0, 
 				pedidosSalvos

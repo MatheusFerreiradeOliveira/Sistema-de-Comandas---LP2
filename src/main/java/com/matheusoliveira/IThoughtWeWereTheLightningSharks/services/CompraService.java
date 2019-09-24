@@ -1,6 +1,7 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,14 @@ public class CompraService {
 	public PedidoRepository pedidoRepository;
 	@Autowired
 	public ProdutoRepository produtoRepository;
+	
+	public List<Compra> searchByMesa(String mesa){
+		return compraRepository.searchByMesa(mesa);
+	}
+	public List<Compra> searchCompraByMesa(String mesa, Date minDate, Date maxDate){
+		maxDate= new Date(maxDate.getTime()+(24*60*60*1000));
+		return compraRepository.searchCompraByMesa(mesa, minDate, maxDate);
+	}
 	
 	public List<CompraDTO> findAll(){
 		List<Compra> compras= compraRepository.findAll();

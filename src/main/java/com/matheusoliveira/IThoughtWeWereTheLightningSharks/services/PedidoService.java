@@ -24,6 +24,10 @@ public class PedidoService {
 		return pedidoRepository.findAll();
 	}
 	
+	public List<Pedido> findByObs(String obs){
+		return pedidoRepository.findByObsContainingIgnoreCase(obs);
+	}
+	
 	public Pedido findById(String id) {
 		Pedido p = pedidoRepository.findOne(id);
 		if(p==null) {

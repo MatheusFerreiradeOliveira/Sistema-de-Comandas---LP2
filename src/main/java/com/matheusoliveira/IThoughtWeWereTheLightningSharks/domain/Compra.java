@@ -15,18 +15,20 @@ public class Compra {
 	private String id;
 	private Date abertura;
 	private Date encerramento;
+	private String mesa;
 	private double cartao;
 	private double dinheiro;
 	private List<String> pedidos = new ArrayList<>();
 
 	public Compra() {};
 	
-	public Compra(String id, Date abertura, Date encerramento, double cartao, Double dinheiro,
+	public Compra(String id, Date abertura, Date encerramento,String mesa, double cartao, Double dinheiro,
 			List<String> pedidos) {
 		super();
 		this.id = id;
 		this.abertura = abertura;
 		this.encerramento = encerramento;
+		this.mesa=mesa;
 		this.cartao = cartao;
 		this.dinheiro = dinheiro;
 		this.pedidos = pedidos;
@@ -61,6 +63,18 @@ public class Compra {
 		this.encerramento = encerramento;
 	}
 	
+	public String getMesa() {
+		return mesa;
+	}
+
+	public void setMesa(String mesa) {
+		this.mesa = mesa;
+	}
+
+	public void setDinheiro(double dinheiro) {
+		this.dinheiro = dinheiro;
+	}
+
 	public double getCartao() {
 		return cartao;
 	}

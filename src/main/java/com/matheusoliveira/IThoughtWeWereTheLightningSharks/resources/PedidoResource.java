@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.PedidoDTO;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.resources.util.URL;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.PedidoService;
 
 @RestController
@@ -38,7 +40,15 @@ public class PedidoResource {
 		return (obj!=null) ? ResponseEntity.ok(obj) : 
 			ResponseEntity.notFound().build();
 	} 
-	/* acredito que nao seja necessario */
+	
+	@GetMapping("/obssearch")
+	public ResponseEntity<List<Pedido>> findByTitle(@RequestParam(value="obs", defaultValue="") String text){
+		text= URL.decodeParam(text);
+		List<Pedido> obj=service.findByObs(text);
+		return (obj!=null) ? ResponseEntity.ok(obj) : 
+			ResponseEntity.notFound().build();
+	} 
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<Pedido> update(@PathVariable String id, @RequestBody PedidoDTO p){
 		p.setId(id);
