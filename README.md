@@ -19,10 +19,11 @@
   
   
 - Exemplo de JSON
-´´´
+
+```
 {
 	"name": "Lucas",
 	"email": "lucas@gmail.com",
 	"senha": "12345"
 }
-´´´
+```
