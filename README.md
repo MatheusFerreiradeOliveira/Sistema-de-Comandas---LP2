@@ -23,7 +23,7 @@
 {
 	"abertura": "AAAA-MM-DD HH:MM:SS",
 	"encerramento": "AAAA-MM-DD HH:MM:SS",
-	"mesa":,"A",
+	"mesa": "A",
 	"cartao": 0.0,
 	"dinheiro": 50.0,
 	"pedidos": [
