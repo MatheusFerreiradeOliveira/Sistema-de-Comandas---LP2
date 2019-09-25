@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,15 +61,50 @@ public class CompraResource {
 	}
 	*/
 	
-	@GetMapping("/search")
-	public ResponseEntity<List<CompraDTO>> searchCompraByMesa(
+	@GetMapping("/searchPage")
+	public ResponseEntity<Page<Compra>> searchCompraByMesa(
 			@RequestParam(value="mesa", defaultValue="") String text,
 			@RequestParam(value="minDate", defaultValue="") String minDate,
-			@RequestParam(value="maxDate", defaultValue="") String maxDate){
+			@RequestParam(value="maxDate", defaultValue="") String maxDate,
+			/*Pageable pageable*/
+            @RequestParam(
+                    value = "page",
+                    required = false,
+                    defaultValue = "0") int page,
+            @RequestParam(
+                    value = "size",
+                    required = false,
+                    defaultValue = "10") int size
+                    
+            ){
 		text = URL.decodeParam(text);
 		Date min = URL.convertDate(minDate, new Date(0L));
 		Date max = URL.convertDate(maxDate, new Date());
-		List<CompraDTO> obj = compraService.searchCompraByMesa(text, min, max);
+		Page<Compra> obj = compraService.searchCompraByMesa(text, min, max,size,page);
+		return (obj!=null) ? ResponseEntity.ok(obj) : 
+			ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<CompraDTO>> searchCompraByMesa2(
+			@RequestParam(value="mesa", defaultValue="") String text,
+			@RequestParam(value="minDate", defaultValue="") String minDate,
+			@RequestParam(value="maxDate", defaultValue="") String maxDate,
+			/*Pageable pageable*/
+            @RequestParam(
+                    value = "page",
+                    required = false,
+                    defaultValue = "0") int page,
+            @RequestParam(
+                    value = "size",
+                    required = false,
+                    defaultValue = "10") int size
+                    
+            ){
+		text = URL.decodeParam(text);
+		Date min = URL.convertDate(minDate, new Date(0L));
+		Date max = URL.convertDate(maxDate, new Date());
+		List<CompraDTO> obj = compraService.searchCompraByMesa2(text, min, max,size,page);
 		return (obj!=null) ? ResponseEntity.ok(obj) : 
 			ResponseEntity.notFound().build();
 	}

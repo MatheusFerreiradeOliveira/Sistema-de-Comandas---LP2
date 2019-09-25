@@ -1,8 +1,9 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository;
 
 import java.util.Date;
-import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,6 @@ public interface CompraRepository extends MongoRepository<Compra, String> {
 			+ "{'abertura' : { $gte: ?1}},"
 			+ "{'encerramento' : { $lte: ?2}} "
 			+ "] }")
-	List<Compra> searchCompraByMesa(String mesa, Date minDate, Date maxDate);
+	Page<Compra> searchCompraByMesa(String mesa, Date minDate, Date maxDate, Pageable pageRequest);
+	
 }

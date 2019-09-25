@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
@@ -31,11 +34,28 @@ public class CompraService {
 		return compraRepository.searchByMesa(mesa);
 	}
 	*/
-	
-	public List<CompraDTO> searchCompraByMesa(String mesa, Date minDate, Date maxDate){
+	public Page<Compra> searchCompraByMesa(String mesa, Date minDate, Date maxDate, 
+			/*Pageable pageable*/ int size, int page){
 		maxDate= new Date(maxDate.getTime()+(24*60*60*1000));
-		List<Compra> compras = compraRepository.searchCompraByMesa(mesa, minDate, maxDate);
+		PageRequest pageRequest = new PageRequest(page, size);
+		return compraRepository.searchCompraByMesa(
+				mesa, 
+				minDate, 
+				maxDate,
+				(Pageable) pageRequest );
+		
+	}
+	public List<CompraDTO> searchCompraByMesa2(String mesa, Date minDate, Date maxDate, 
+			/*Pageable pageable*/ int size, int page){
+		maxDate= new Date(maxDate.getTime()+(24*60*60*1000));
+		PageRequest pageRequest = new PageRequest(page, size);
+		Page<Compra> pageCompra = compraRepository.searchCompraByMesa(
+				mesa, 
+				minDate, 
+				maxDate,
+				(Pageable) pageRequest );
 		List<CompraDTO> obj= new ArrayList<>();
+		List<Compra> compras = pageCompra.getContent();
 		for(Compra c : compras) {
 			CompraDTO dto = new CompraDTO(c);
 			List<String> pedidosString= c.getPedidos();
@@ -46,6 +66,7 @@ public class CompraService {
 			obj.add(dto);
 		}
 		return obj;
+		
 	}
 	
 	public List<CompraDTO> findAll(){
