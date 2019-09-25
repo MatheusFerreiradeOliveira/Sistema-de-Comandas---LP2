@@ -63,7 +63,7 @@ public class CompraResource {
 	@GetMapping("/search")
 	public ResponseEntity<List<CompraDTO>> searchCompraByMesa(
 			@RequestParam(value="mesa", defaultValue="") String text,
-			@RequestParam(value="minate", defaultValue="") String minDate,
+			@RequestParam(value="minDate", defaultValue="") String minDate,
 			@RequestParam(value="maxDate", defaultValue="") String maxDate){
 		text = URL.decodeParam(text);
 		Date min = URL.convertDate(minDate, new Date(0L));
