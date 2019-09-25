@@ -32,9 +32,20 @@ public class CompraService {
 	}
 	*/
 	
-	public List<Compra> searchCompraByMesa(String mesa, Date minDate, Date maxDate){
+	public List<CompraDTO> searchCompraByMesa(String mesa, Date minDate, Date maxDate){
 		maxDate= new Date(maxDate.getTime()+(24*60*60*1000));
-		return compraRepository.searchCompraByMesa(mesa, minDate, maxDate);
+		List<Compra> compras = compraRepository.searchCompraByMesa(mesa, minDate, maxDate);
+		List<CompraDTO> obj= new ArrayList<>();
+		for(Compra c : compras) {
+			CompraDTO dto = new CompraDTO(c);
+			List<String> pedidosString= c.getPedidos();
+			for(String pId : pedidosString) {
+				Pedido pedido=pedidoRepository.findOne(pId);
+				dto.insertPedido(pedido);
+			}
+			obj.add(dto);
+		}
+		return obj;
 	}
 	
 	public List<CompraDTO> findAll(){

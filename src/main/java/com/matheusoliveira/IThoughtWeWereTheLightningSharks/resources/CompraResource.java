@@ -61,17 +61,17 @@ public class CompraResource {
 	*/
 	
 	@GetMapping("/search")
-	public ResponseEntity<List<Compra>> searchCompraByMesa(
+	public ResponseEntity<List<CompraDTO>> searchCompraByMesa(
 			@RequestParam(value="mesa", defaultValue="") String text,
 			@RequestParam(value="minate", defaultValue="") String minDate,
 			@RequestParam(value="maxDate", defaultValue="") String maxDate){
-		text= URL.decodeParam(text);
-		Date min =URL.convertDate(minDate, new Date(0L));
-		Date max =URL.convertDate(maxDate, new Date());
-		List<Compra> obj=compraService.searchCompraByMesa(text, min, max);
+		text = URL.decodeParam(text);
+		Date min = URL.convertDate(minDate, new Date(0L));
+		Date max = URL.convertDate(maxDate, new Date());
+		List<CompraDTO> obj = compraService.searchCompraByMesa(text, min, max);
 		return (obj!=null) ? ResponseEntity.ok(obj) : 
 			ResponseEntity.notFound().build();
-	} 
+	}
 	
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody CompraDTO compraDTO) {
@@ -89,6 +89,7 @@ public class CompraResource {
 	//@PostMapping("/{id}/pedidos")
 	public ResponseEntity<Void> insertPedido(@PathVariable String id, @RequestBody List<PedidoDTO> list) {
 		Compra compra = compraService.insertNewPedido(id, list);
+		//System.out.println(compra.toString());
 		/*
 		URI uri=ServletUriComponentsBuilder
 				.fromCurrentRequest()
