@@ -8,8 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
-
 @Document(collection="compras")
 public class Compra {
 	@Id
@@ -35,9 +33,10 @@ public class Compra {
 		this.dinheiro = dinheiro;
 		this.pedidos = pedidos;
 	}
-	public Compra(CompraDTO compra) {
+	public Compra(Compra compra) {
 		super();
 		this.id = compra.getId();
+		this.mesa = compra.getMesa();
 		this.abertura = compra.getAbertura();
 		this.encerramento = compra.getEncerramento();
 		this.cartao = compra.getCartao();

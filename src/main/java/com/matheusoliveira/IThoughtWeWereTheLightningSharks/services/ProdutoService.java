@@ -3,6 +3,10 @@ package com.matheusoliveira.IThoughtWeWereTheLightningSharks.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Produto;
@@ -14,8 +18,15 @@ public class ProdutoService {
 	@Autowired
 	public ProdutoRepository repository;
 	
-	public List<Produto> findAll(){
-		return repository.findAll();
+	public Page<Produto> findAll(int page, int size){
+        PageRequest pageRequest = new PageRequest(
+                page,
+                size,
+                Sort.Direction.ASC,
+                "abertura");
+		List<Produto> p= repository.findAll();
+		return new PageImpl<>(p, 
+                pageRequest, size);
 	}
 	
 	public Produto findById(String id) {

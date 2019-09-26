@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.PedidoDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.resources.util.URL;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.CompraService;
@@ -97,29 +98,22 @@ public class CompraResource {
 	}
 	
 
-	//@PostMapping("/{id}/pedidos")
 	@PatchMapping("/{id}/pedidos")
 	public ResponseEntity<Void> insertPedido(@PathVariable String id, @RequestBody List<PedidoDTO> list) {
 		compraService.insertNewPedido(id, list);
-		//Compra compra = compraService.insertNewPedido(id, list);
-		//System.out.println(compra.toString());
-		/*
-		URI uri=ServletUriComponentsBuilder
-				.fromCurrentRequest()
-				.path("/{id}")
-				.buildAndExpand(compra.getId())
-				.toUri();
-		return ResponseEntity.created(uri).build();
-		*/
 		return ResponseEntity.noContent().build();
 	}
-	
+	@GetMapping("/{id}/encerrar")
+	public ResponseEntity<CompraDTO> encerrarConta(@PathVariable String id) {
+		CompraDTO obj =compraService.encerrarCompra(id);
+		return (obj!=null) ? ResponseEntity.ok(obj) : 
+			ResponseEntity.notFound().build();
+	}
 	@PatchMapping("/{id}")
 	public ResponseEntity<Void> update(@PathVariable String id, 
 										@RequestBody Compra compra){
 		compra.setId(id);
 		compra=compraService.update(compra);
-		//System.out.println(compra.toString());
 		return ResponseEntity.noContent().build();
 	}
 	

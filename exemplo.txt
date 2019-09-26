@@ -1,6 +1,18 @@
 LINKS UTEIS:
 https://medium.com/@fabiano_goes/api-rest-com-pagina%C3%A7%C3%A3o-usando-spring-data-e-query-9eddb29c9223
 /*-----------------------------------------------------------*/
+//@PostMapping("/{id}/pedidos")
+/**Compra compra = compraService.insertNewPedido(id, list);
+			System.out.println(compra.toString());
+			
+			URI uri=ServletUriComponentsBuilder
+					.fromCurrentRequest()
+					.path("/{id}")
+					.buildAndExpand(compra.getId())
+					.toUri();
+			return ResponseEntity.created(uri).build();
+		*/
+
 public List<CompraDTO> searchCompraByMesa2(String mesa, Date minDate, Date maxDate, 
 			/*Pageable pageable*/ int size, int page){
 		maxDate= new Date(maxDate.getTime()+(24*60*60*1000));

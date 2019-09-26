@@ -16,7 +16,11 @@
 | POST  | `http://127.0.0.1:8082/compras/{ID}/pedidos`  | Adiciona um novo pedido na compra com id passado no parâmetro |
 | PATH  | `http://127.0.0.1:8082/compras/{ID}`  | Altera os atributos da compras com id passado no parâmetro  |
 | DELETE  | `http://127.0.0.1:8082/compras/{ID}`  | Deleta a compra com id passado no parâmetro |
-    
+
+> Obs.: quando inserir uma nova compra, deve-se deixar os camposde encerramento, cartao, dinheiro vazios, 
+pois serao atualizadas quando ele realizar  GET: `http://127.0.0.1:8082/compras/{ID}/encerrar`
+
+
 - Exemplo de JSON
 
 ```

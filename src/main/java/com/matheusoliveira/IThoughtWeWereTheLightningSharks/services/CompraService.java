@@ -1,5 +1,6 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Produto;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.PedidoDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.CompraRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.PedidoRepository;
@@ -64,7 +66,13 @@ public class CompraService {
 	}
 	
 	public Compra insert(Compra compra) {
-		return compraRepository.insert(compra);
+		Compra obj = new Compra(compra);
+		List<Pedido> pedidos= compra.getPedidos();
+		for(Pedido pedido : pedidos) {
+			pedido = savePedido(pedido);
+			obj.insertPedido(pedido);
+		}
+		return compraRepository.insert(obj);
 	}
 	
 	public Page<Pedido> findPedidoByCompra(String id){
@@ -107,10 +115,29 @@ public class CompraService {
 		}
 		return compraRepository.save(compra);
 	}
+	public CompraDTO encerrarCompra(String id) {
+		Compra compra = findById(id);
+		double total=0.0;
+		List<Pedido> pedidos= new ArrayList<>();
+		for(Pedido p : compra.getPedidos()) {
+			pedidos.add(p);
+			total+=p.getTotal();
+		}
+		CompraDTO compraDTO = new CompraDTO(compra);
+		compraDTO.setTotal(total);
+		compraDTO.setPedidos(pedidos);
+		compraDTO.setEncerramento(new Date());
+		return compraDTO;
+	}
 	
 	private Pedido savePedido(Pedido pedido) {
 		Produto produto= verifyProdutoExist(pedido);
 		pedido.setProduto(produto);
+		if(pedido.getProduto().isPeso()==true) 
+			pedido.setTotal(pedido.getPeso() * pedido.getProduto().getValor() * pedido.getQtdItens());
+		else 
+			pedido.setTotal(pedido.getProduto().getValor() * pedido.getQtdItens());
+		
 		return pedidoRepository.insert(pedido);
 	}
 	
@@ -147,6 +174,8 @@ public class CompraService {
 			compra.setCartao(obj.getCartao());
 		if(compra.getAbertura()==null)
 			compra.setAbertura(obj.getAbertura());
+		if(compra.getMesa()==null)
+			compra.setMesa(obj.getMesa());
 		if(compra.getEncerramento()==null)
 			compra.setEncerramento(obj.getEncerramento());
 		for(Pedido p : obj.getPedidos()) {
