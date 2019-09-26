@@ -51,24 +51,33 @@ public class Instantiation implements CommandLineRunner {
 		Produto p3 = new Produto(null, "Carne de Sol", 20.0, true);
 		Produto p4 = new Produto(null, "Cerveja", 3.50, false);
 		Produto p5 = new Produto(null, "Lombinho do Micaias", 0.05, false);
+		
 		//List<Produto> produto= new ArrayList<Produto>();
 		produtoRepository.save(Arrays.asList(p1,p2,p3,p4,p5));
-		Pedido pedido1=new Pedido(null, 1, 35.0, 1.0, sdf.parse("2019-07-20 12:30:00"), "sem espinas", p1);
-		Pedido pedido2=new Pedido(null, 2, 7.0, 0, sdf.parse("2019-07-20 12:45:00"), "", p4);
+		Pedido pedido1=new Pedido(null, 1, 35.0, 1.0, sdf.parse("2019-07-20 09:30:00"), "sem espinas", p1);
+		Pedido pedido2=new Pedido(null, 2, 7.0, 0, sdf.parse("2019-07-20 11:45:00"), "", p4);
+		Pedido pedido3=new Pedido(null, 1, 35.0, 1.0, sdf.parse("2019-07-20 12:50:00"), "sem espinas", p2);
+		Pedido pedido4=new Pedido(null, 2, 7.0, 0, sdf.parse("2019-07-20 13:45:00"), "", p3);
+		
 		//pedidoRepository.save(Arrays.asList(pedido1,pedido2));
 		pedido1 = pedidoRepository.save(pedido1);
 		pedido2 = pedidoRepository.save(pedido2);
-		List<String> pedidosSalvos= new ArrayList<>();
-		pedidosSalvos.add(pedido1.getId());
-		pedidosSalvos.add(pedido2.getId());
+		pedido3 = pedidoRepository.save(pedido2);
+		pedido4 = pedidoRepository.save(pedido4);
 		
+		List<Pedido> pedidosSalvos1= new ArrayList<>();
+		pedidosSalvos1.add(pedido1);
+		pedidosSalvos1.add(pedido2);
+		List<Pedido> pedidosSalvos2= new ArrayList<>();
+		pedidosSalvos2.add(pedido3);
+		pedidosSalvos2.add(pedido4);
 		Compra c1=new Compra(null, 
-				sdf.parse("2019-07-20 12:30:00"),
-				sdf.parse("2019-07-20 16:45:00"), 
+				sdf.parse("2019-07-20 09:30:00"),
+				sdf.parse("2019-07-20 12:15:00"), 
 				"A",
 				0.0, 
 				43.0, 
-				pedidosSalvos
+				pedidosSalvos1
 				);
 		Compra c2=new Compra(null, 
 				sdf.parse("2019-07-20 12:30:00"),
@@ -76,7 +85,7 @@ public class Instantiation implements CommandLineRunner {
 				"B",
 				0.0, 
 				43.0, 
-				pedidosSalvos
+				pedidosSalvos2
 				);
 		compraRepository.save(c1);
 		compraRepository.save(c2);

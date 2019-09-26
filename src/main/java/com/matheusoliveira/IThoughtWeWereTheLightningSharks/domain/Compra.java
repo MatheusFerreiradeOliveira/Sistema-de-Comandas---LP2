@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
@@ -18,12 +19,13 @@ public class Compra {
 	private String mesa;
 	private double cartao;
 	private double dinheiro;
-	private List<String> pedidos = new ArrayList<>();
+	@DBRef(lazy=true)
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Compra() {};
 	
 	public Compra(String id, Date abertura, Date encerramento,String mesa, double cartao, Double dinheiro,
-			List<String> pedidos) {
+			List<Pedido> pedidos) {
 		super();
 		this.id = id;
 		this.abertura = abertura;
@@ -89,16 +91,16 @@ public class Compra {
 		this.dinheiro = dinheiro;
 	}
 	
-	public List<String> getPedidos() {
+	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
-	public void setPedidos(List<String> pedidos) {
+	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-	public void insertPedido(String p) {
+	public void insertPedido(Pedido p) {
 		this.pedidos.add(p);
 	}
-	public void insertAllPedido(List<String> p) {
+	public void insertAllPedido(List<Pedido> p) {
 		pedidos.addAll(p);
 	}
 

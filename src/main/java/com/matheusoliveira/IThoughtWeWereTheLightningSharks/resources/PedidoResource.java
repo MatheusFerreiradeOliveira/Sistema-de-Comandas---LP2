@@ -2,9 +2,9 @@ package com.matheusoliveira.IThoughtWeWereTheLightningSharks.resources;
 
 import java.net.URI;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +31,7 @@ public class PedidoResource {
 	
 	/** alterar pra pegar todos pedidos em um periodo*/
 	@GetMapping
-	public List<Pedido> findAll(){
+	public Page<Pedido> findAll(){
 		return service.findAll();
 	} 
 	
@@ -43,22 +43,32 @@ public class PedidoResource {
 	} 
 	
 	@GetMapping("/obssearch")
-	public ResponseEntity<List<Pedido>> findByTitle(@RequestParam(value="obs", defaultValue="") String text){
+	public ResponseEntity<Page<Pedido>> findByTitle(@RequestParam(value="obs", defaultValue="") String text){
 		text= URL.decodeParam(text);
-		List<Pedido> obj=service.findByObs(text);
+		Page<Pedido> obj=service.findByObs(text);
 		return (obj!=null) ? ResponseEntity.ok(obj) : 
 			ResponseEntity.notFound().build();
 	} 
 	
 	@GetMapping("/search")
-	public ResponseEntity<List<Pedido>> searchCompraByMesa(
+	public ResponseEntity<Page<Pedido>> searchCompraByMesa(
 			@RequestParam(value="produto", defaultValue="") String text,
 			@RequestParam(value="minate", defaultValue="") String minDate,
-			@RequestParam(value="maxDate", defaultValue="") String maxDate){
+			@RequestParam(value="maxDate", defaultValue="") String maxDate,
+			@RequestParam(
+                    value = "page",
+                    required = false,
+                    defaultValue = "0") int page,
+            @RequestParam(
+                    value = "size",
+                    required = false,
+                    defaultValue = "10") int size
+                    
+            ){
 		text= URL.decodeParam(text);
 		Date min =URL.convertDate(minDate, new Date(0L));
 		Date max =URL.convertDate(maxDate, new Date());
-		List<Pedido> obj=service.searchPedido(text, min, max);
+		Page<Pedido> obj=service.searchPedido(text, min, max, size, page);
 		return (obj!=null) ? ResponseEntity.ok(obj) : 
 			ResponseEntity.notFound().build();
 	} 

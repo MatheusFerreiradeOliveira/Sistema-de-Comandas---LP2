@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Permissoes;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Usuario;
-import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.PermissoesRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.UsuarioRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.services.exception.ObjectNotFoundException;
 
@@ -16,8 +14,8 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@Autowired
-	private PermissoesRepository permissoesRepository;
+	//@Autowired
+	//private PermissoesRepository permissoesRepository;
 	
 	public List<Usuario> findAll(){
 		return usuarioRepository.findAll();
@@ -46,7 +44,7 @@ public class UsuarioService {
 		if(user2.getNome()!=null)
 			user1.setNome(user2.getNome());
 		
-		Permissoes permissao;
+		//Permissoes permissao;
 		
 		/*if(user2.getPermissoes()!=null) {
 			for(Permissoes x : user2.getPermissoes()) {

@@ -1,9 +1,13 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.services;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
@@ -22,17 +26,33 @@ public class PedidoService {
 	private ProdutoRepository produtoRepository;
 	
 	
-	public List<Pedido> searchPedido(String produto, Date minDate, Date maxDate){
+	public Page<Pedido> searchPedido(String produto, Date minDate, Date maxDate, int size, int page){
 		maxDate= new Date(maxDate.getTime()+(24*60*60*1000));
-		return pedidoRepository.searchPedido(produto, minDate, maxDate);
+		PageRequest pageRequest = new PageRequest(page, size);
+		return pedidoRepository.searchPedido(produto, minDate, maxDate,
+				(Pageable) pageRequest );
 	}
 	
-	public List<Pedido> findAll(){
-		return pedidoRepository.findAll();
+	public Page<Pedido> findAll(){
+		int page = 0;
+        int size = 10;
+        PageRequest pageRequest = new PageRequest(
+                page,
+                size,
+                Sort.Direction.ASC,
+                "hora");
+		return new PageImpl<>(pedidoRepository.findAll(),pageRequest, size);
 	}
 	
-	public List<Pedido> findByObs(String obs){
-		return pedidoRepository.findByObsContainingIgnoreCase(obs);
+	public Page<Pedido> findByObs(String obs){
+		int page = 0;
+        int size = 10;
+        PageRequest pageRequest = new PageRequest(
+                page,
+                size,
+                Sort.Direction.ASC,
+                "hora");
+		return pedidoRepository.findByObsContainingIgnoreCase(obs, (Pageable) pageRequest);
 	}
 	
 	public Pedido findById(String id) {

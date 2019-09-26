@@ -1,4 +1,59 @@
-
+LINKS UTEIS:
+https://medium.com/@fabiano_goes/api-rest-com-pagina%C3%A7%C3%A3o-usando-spring-data-e-query-9eddb29c9223
+/*-----------------------------------------------------------*/
+public List<CompraDTO> searchCompraByMesa2(String mesa, Date minDate, Date maxDate, 
+			/*Pageable pageable*/ int size, int page){
+		maxDate= new Date(maxDate.getTime()+(24*60*60*1000));
+		PageRequest pageRequest = new PageRequest(page, size);
+		Page<Compra> pageCompra = compraRepository.searchCompraByMesa(
+				mesa, 
+				minDate, 
+				maxDate,
+				(Pageable) pageRequest );
+		List<CompraDTO> obj= new ArrayList<>();
+		List<Compra> compras = pageCompra.getContent();
+		for(Compra c : compras) {
+			CompraDTO dto = new CompraDTO(c);
+			List<Pedido> pedidosString= c.getPedidos();
+			for(Pedido pId : pedidosString) {
+				Pedido pedido=pedidoRepository.findOne(pId.getId());
+				dto.insertPedido(pedido);
+			}
+			obj.add(dto);
+		}
+		return obj;
+		
+	}
+/*List<CompraDTO> obj= new ArrayList<>();
+		for(Compra c : compras) {
+			CompraDTO dto = new CompraDTO(c);
+			List<Pedido> pedidosString= c.getPedidos();
+			for(Pedido pId : pedidosString) {
+				Pedido pedido=pedidoRepository.findOne(pId.getId());
+				dto.insertPedido(pedido);
+			}
+			obj.add(dto);
+		}*/
+/*CompraDTO dto = new CompraDTO(obj);
+		List<Pedido> pedidos= obj.getPedidos();
+		for(Pedido pId : pedidos) {
+			Pedido pedido = pedidoRepository.findOne(pId.getId());
+			dto.insertPedido(pedido);
+		}*/
+		
+		/*
+		Compra compra=new Compra(compraDTO);
+		List<Pedido> pedidos= compraDTO.getPedidos();
+		for(Pedido pedido : pedidos) {
+			pedido = savePedido(pedido);
+			compra.insertPedido(pedido);
+		}
+		*/
+		/*
+	public List<Compra> searchByMesa(String mesa){
+		return compraRepository.searchByMesa(mesa);
+	}
+	*/
 
 /*-----------------------------------------------------------*/
 //EXEMPLO
