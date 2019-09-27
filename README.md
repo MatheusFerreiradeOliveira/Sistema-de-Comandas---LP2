@@ -18,45 +18,58 @@
 
 #### Usuários
 
-| Method | Route | Header | Params
-| --- | --- | --- | --- |
+| Method | Route | Header | Params |
+| --- | --- | --- | --- | 
 | GET | `http://127.0.0.1:8082/usuarios` | Content-Type : application/json | none |
 
-| Body |
+| Return |
 | --- | 
-
-
-```
+```js
 {
-    "abertura": "2019-12-11T12:12:12",
-    "mesa": "C",
-    "pedidos": [
+    "content": [
         {
-            "qtdItens": 1,
-            "peso": 1.0,
-            "hora": "2019-12-11T12:12:12",
-            "obs": "ao ponto",
-            "produto":{ "id":"5d8d0289dad01905f8756dbd"}
-            
-        }
-    ]
-} 
-```
-```
-{
-    "abertura": "2019-12-11T12:12:12",
-    "mesa": "C",
-    "pedidos": [
+            "id": "5d8df1b7dad0190768dd6cb7",
+            "nome": "Joaquin",
+            "permissoes": [
+                {
+                    "id": "5d8df1b7dad0190768dd6cb3",
+                    "descricao": "Adicionar mesas"
+                },
+                {
+                    "id": "5d8df1b7dad0190768dd6cb4",
+                    "descricao": "Inserir produto"
+                },
+                {
+                    "id": "5d8df1b7dad0190768dd6cb5",
+                    "descricao": "Realizar pedido"
+                },
+                {
+                    "id": "5d8df1b7dad0190768dd6cb6",
+                    "descricao": "Listar compras"
+                }
+            ]
+        },
         {
-            "qtdItens": 1,
-            "peso": 1.0,
-            "hora": "2019-12-11T12:12:12",
-            "obs": "ao ponto",
-            "produto":{ "id":"5d8d0289dad01905f8756dbd"}
-            
+            "id": "5d8df1b7dad0190768dd6cb8",
+            "nome": "Garçoneide",
+            "permissoes": [
+                {
+                    "id": "5d8df1b7dad0190768dd6cb5",
+                    "descricao": "Realizar pedido"
+                }
+            ]
         }
-    ]
-} ```
+    ],
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 10,
+    "size": 10,
+    "number": 0,
+    "sort": null,
+    "first": true,
+    "numberOfElements": 2
+}
+```
 
 
 
