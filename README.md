@@ -21,7 +21,45 @@
 | Método | Rota | 
 | --- | --- |
 | GET | `http://127.0.0.1:8082/usuarios` |
-| retprno |
+
+| Body | Retorno |
+| --- | --- |
+|
+```JS
+{
+    "abertura": "2019-12-11T12:12:12",
+    "mesa": "C",
+    "pedidos": [
+        {
+            "qtdItens": 1,
+            "peso": 1.0,
+            "hora": "2019-12-11T12:12:12",
+            "obs": "ao ponto",
+            "produto":{ "id":"5d8d0289dad01905f8756dbd"}
+            
+        }
+    ]
+}
+```
+|
+```JS
+{
+    "abertura": "2019-12-11T12:12:12",
+    "mesa": "C",
+    "pedidos": [
+        {
+            "qtdItens": 1,
+            "peso": 1.0,
+            "hora": "2019-12-11T12:12:12",
+            "obs": "ao ponto",
+            "produto":{ "id":"5d8d0289dad01905f8756dbd"}
+            
+        }
+    ]
+}
+```
+|
+
 
 
 #### Compras
