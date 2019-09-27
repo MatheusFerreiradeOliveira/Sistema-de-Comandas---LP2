@@ -16,7 +16,9 @@
   
 > Obs.: O atributo id é obrigatório para atualizar qualquer entidade.
 
-#### Usuários
+### Usuários
+
+1. 
 
 | Method | Route | Header | Params |
 | --- | --- | --- | --- | 
@@ -70,7 +72,60 @@
     "numberOfElements": 2
 }
 ```
+2. 
 
+| Method | Route | Header | Params |
+| --- | --- | --- | --- | 
+| GET | `http://127.0.0.1:8082/usuarios/search?page=0&size=1` | Content-Type : application/json | size & page |
+
+| Return | _Traz uma lista paginada por filtros, de usuarios e suas permissões_ |
+| --- | --- |
+```js
+{
+    "content": [
+        {
+            "id": "5d8df1b7dad0190768dd6cb7",
+            "nome": "Joaquin",
+            "permissoes": [
+                {
+                    "id": "5d8df1b7dad0190768dd6cb3",
+                    "descricao": "Adicionar mesas"
+                },
+                {
+                    "id": "5d8df1b7dad0190768dd6cb4",
+                    "descricao": "Inserir produto"
+                },
+                {
+                    "id": "5d8df1b7dad0190768dd6cb5",
+                    "descricao": "Realizar pedido"
+                },
+                {
+                    "id": "5d8df1b7dad0190768dd6cb6",
+                    "descricao": "Listar compras"
+                }
+            ]
+        },
+        {
+            "id": "5d8df1b7dad0190768dd6cb8",
+            "nome": "Garçoneide",
+            "permissoes": [
+                {
+                    "id": "5d8df1b7dad0190768dd6cb5",
+                    "descricao": "Realizar pedido"
+                }
+            ]
+        }
+    ],
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 1,
+    "size": 1,
+    "number": 0,
+    "sort": null,
+    "first": true,
+    "numberOfElements": 2
+}
+```
 
 
 #### Compras
