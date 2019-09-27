@@ -22,8 +22,8 @@
 | --- | --- | --- | --- | 
 | GET | `http://127.0.0.1:8082/usuarios` | Content-Type : application/json | none |
 
-| Return |
-| --- | 
+| Return | _Traz uma lista paginada de usuarios e suas permissões_ |
+| --- | --- |
 ```js
 {
     "content": [
