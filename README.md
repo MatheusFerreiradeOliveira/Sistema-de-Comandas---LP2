@@ -18,12 +18,14 @@
 
 #### Usuários
 
-| Método | Rota | 
-| --- | --- |
-| GET | `http://127.0.0.1:8082/usuarios` |
+| Method | Route | Header | Params
+| --- | --- | --- | --- |
+| GET | `http://127.0.0.1:8082/usuarios` | Content-Type : application/json | none |
 
-| Body | header : Content-Type : application/json |
-| --- | --- |
+| Body |
+| --- | 
+
+
 ```
 {
     "abertura": "2019-12-11T12:12:12",
