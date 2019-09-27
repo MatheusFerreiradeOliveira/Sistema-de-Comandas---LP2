@@ -22,10 +22,9 @@
 | --- | --- |
 | GET | `http://127.0.0.1:8082/usuarios` |
 
-| Body | Retorno |
+| Body | header : Content-Type : application/json |
 | --- | --- |
-|
-```JS
+```
 {
     "abertura": "2019-12-11T12:12:12",
     "mesa": "C",
@@ -39,10 +38,9 @@
             
         }
     ]
-}
+} 
 ```
-|
-```JS
+```
 {
     "abertura": "2019-12-11T12:12:12",
     "mesa": "C",
@@ -56,9 +54,7 @@
             
         }
     ]
-}
-```
-|
+} ```
 
 
 
