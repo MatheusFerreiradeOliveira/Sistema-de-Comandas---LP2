@@ -4,7 +4,7 @@
 
 > Este é uma API REST simples, onde é implementado o back-end, com os objetivos de controle de estoque e auxilio no atendimento de uma barraca de praia ou restaurante.
 
-## Ferramentas utiliadas
+## Ferramentas utilizadas
 
 - Java
 - Spring Boot
