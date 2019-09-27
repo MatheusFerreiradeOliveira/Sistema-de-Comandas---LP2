@@ -1,9 +1,29 @@
 # Sistema de Comandas
 
+## Resumo
+
+> Este é uma API REST simples, onde é implementado o back-end, com os objetivos de controle de estoque e auxilio no atendimento de uma barraca de praia ou restaurante.
+
+## Ferramentas utiliadas
+
+- Java
+- Spring Boot
+- Maven
+- MongoDB
+- Postman ou Insomnia
+
 ## Requisições  
   
 > Obs.: O atributo id é obrigatório para atualizar qualquer entidade.
-  
+
+#### Usuários
+
+| Método | Rota | 
+| --- | --- |
+| GET | `http://127.0.0.1:8082/usuarios` |
+| retprno |
+
+
 #### Compras
   
 | Método | Rota | Retorno |
