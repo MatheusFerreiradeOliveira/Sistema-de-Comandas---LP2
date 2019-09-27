@@ -21,31 +21,22 @@
 pois serao atualizadas quando ele realizar  GET: `http://127.0.0.1:8082/compras/{ID}/encerrar`
 
 
-- Exemplo de JSON
+- Exemplo de Body para cadastrar nova compra em JSON
 
 ```
 {
-	"abertura": "AAAA-MM-DD HH:MM:SS",
-	"encerramento": "AAAA-MM-DD HH:MM:SS",
-	"mesa": "A",
-	"cartao": 0.0,
-	"dinheiro": 50.0,
-	"pedidos": [
-		{
-	 		"qtdItens": 1,
-	 		"total": 50.0,
-	 		"peso": false,
-	 		"hora": "AAAA-MM-DD HH:MM:SS",
-			"obs": "Sem sal",
-	 		"produto": [
-				{
-					"nome": "Peixe frito",
-					"valor": 50.0,
- 					"peso": false		
-				}
-			]
-		}
-	]
+    "abertura": "2019-12-11T12:12:12",
+    "mesa": "C",
+    "pedidos": [
+        {
+            "qtdItens": 1,
+            "peso": 1.0,
+            "hora": "2019-12-11T12:12:12",
+            "obs": "ao ponto",
+            "produto":{ "id":"5d8d0289dad01905f8756dbd"}
+            
+        }
+    ]
 }
 
 ```
@@ -57,28 +48,8 @@ pois serao atualizadas quando ele realizar  GET: `http://127.0.0.1:8082/compras/
 | GET | `http://127.0.0.1:8082/pedidos` | Retorna todos os pedidos |
 | GET | `http://127.0.0.1:8082/pedidos/{ID}` | Retorna o pedido com id passado no parâmetro |
 | GET | `http://127.0.0.1:8082/pedidos/obssearch` | Retorna a lista de pedidos com a observação passada no filtro |
-| POST  | `http://127.0.0.1:8082/pedidos`  | Adiciona um novo pedido |
 | PATH  | `http://127.0.0.1:8082/pedidos/{ID}`  | Altera os atributos do pedido com id passado no parâmetro |
 | DELETE  | `http://127.0.0.1:8082/pedidos/{ID}`  | Deleta o pedido com id passado no parâmetro |
-  
-- Exemplo de JSON
-
-```
-{
-	"qtdItens": 1,
-	"total": 50.0,
- 	"peso": false,
-	"hora": "AAAA-MM-DD HH:MM:SS",
-	"obs": "Sem sal",
-	"produto": [
-		{
-			"nome": "Peixe frito",
-			"valor": 50.0,
- 			"peso": false		
-		}
-	]
-}
-```
 
 #### Produtos
   
@@ -97,5 +68,25 @@ pois serao atualizadas quando ele realizar  GET: `http://127.0.0.1:8082/compras/
 	"nome": "Batata frita",
 	"valor": 5.0,
  	"peso": false
+}
+```
+
+#### Usuários
+  
+| Método | Rota | Retorno |
+| --- | --- | --- |
+| GET | `http://127.0.0.1:8082/usuarios` | Retorna todos os usuarios |
+| GET | `http://127.0.0.1:8082/usuarios/{ID}` | Retorna o usuario com id passado no parâmetro |
+| POST  | `http://127.0.0.1:8082/usuario`  | Adiciona um novo usuario |
+| PATH  | `http://127.0.0.1:8082/usuario/{ID}`  | Altera os atributos do usuario com id passado no parâmetro |
+| DELETE  | `http://127.0.0.1:8082/usuario/{ID}`  | Deleta o usuario com id passado no parâmetro |
+  
+- Exemplo de JSON
+
+```
+{
+	"nome": "Micaias",
+	"permissoes": [
+	]
 }
 ```
