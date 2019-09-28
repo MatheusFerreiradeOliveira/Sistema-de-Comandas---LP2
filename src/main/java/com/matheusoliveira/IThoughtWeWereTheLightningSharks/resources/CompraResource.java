@@ -118,10 +118,17 @@ public class CompraResource {
 										@RequestBody CompraEncerrarDTO compra){
 		compra.setId(id);
 		Compra obj = new Compra(compra);
+		System.out.println(obj);
 		obj = compraService.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
+	@PatchMapping("/{id}")
+	public ResponseEntity<Void> updateCompra(@PathVariable String id, 
+										@RequestBody Compra compra){
+		compra.setId(id);
+		compra = compraService.update(compra);
+		return ResponseEntity.noContent().build();
+	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id){
