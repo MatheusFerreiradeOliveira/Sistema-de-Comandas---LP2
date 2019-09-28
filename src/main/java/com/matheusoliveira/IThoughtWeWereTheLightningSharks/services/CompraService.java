@@ -16,6 +16,7 @@ import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Compra;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Pedido;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Produto;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.CompraDTO;
+import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.NewCompraInDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.dto.PedidoDTO;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.CompraRepository;
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.repository.PedidoRepository;
@@ -30,7 +31,6 @@ public class CompraService {
 	public PedidoRepository pedidoRepository;
 	@Autowired
 	public ProdutoRepository produtoRepository;
-	
 	
 	public Page<Compra> searchCompraByMesa(String mesa, Date minDate, Date maxDate, 
 			/*Pageable pageable*/ int size, int page){
@@ -65,10 +65,14 @@ public class CompraService {
 		return obj;
 	}
 	
-	public Compra insert(Compra compra) {
-		Compra obj = new Compra(compra);
-		List<Pedido> pedidos= compra.getPedidos();
-		for(Pedido pedido : pedidos) {
+	public Compra insert(NewCompraInDTO compraIn) {
+		Compra obj = new Compra(compraIn);
+		List<PedidoDTO> pedidos= compraIn.getPedidos();
+		for(PedidoDTO pDto : pedidos) {
+			Produto produtoAux = new Produto();
+			produtoAux.setId(pDto.getProduto());
+			Pedido pedido = new Pedido(pDto);
+			pedido.setProduto(produtoAux);
 			pedido = savePedido(pedido);
 			obj.insertPedido(pedido);
 		}
@@ -99,10 +103,6 @@ public class CompraService {
 		Compra compra = findById(id);
 		/* insere todos novos pedidos */
 		for(PedidoDTO pDTO : pedidosDTO) {
-			/* 
-			 * usa produto aux pra procurar se é valido.
-			 *  obs: ele faz isso no momento de inserir
-			 *  */
 			Produto produtoAux = new Produto();
 			produtoAux.setId(pDTO.getProduto());
 			
@@ -115,6 +115,7 @@ public class CompraService {
 		}
 		return compraRepository.save(compra);
 	}
+
 	public CompraDTO encerrarCompra(String id) {
 		Compra compra = findById(id);
 		double total=0.0;

@@ -1,8 +1,9 @@
 package com.matheusoliveira.IThoughtWeWereTheLightningSharks.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.matheusoliveira.IThoughtWeWereTheLightningSharks.domain.Usuario;
@@ -17,8 +18,10 @@ public class UsuarioService {
 	//@Autowired
 	//private PermissoesRepository permissoesRepository;
 	
-	public List<Usuario> findAll(){
-		return usuarioRepository.findAll();
+	public Page<Usuario> findAll(int page,int size){
+		PageRequest pageRequest = new PageRequest(page, size);
+		return new PageImpl<>( usuarioRepository.findAll(), 
+				pageRequest, size);
 	}
 	
 	public Usuario findById(String id) {

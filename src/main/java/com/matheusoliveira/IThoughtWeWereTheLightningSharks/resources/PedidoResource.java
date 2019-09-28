@@ -52,17 +52,11 @@ public class PedidoResource {
 	
 	@GetMapping("/search")
 	public ResponseEntity<Page<Pedido>> searchCompraByMesa(
-			@RequestParam(value="produto", defaultValue="") String text,
-			@RequestParam(value="minate", defaultValue="") String minDate,
-			@RequestParam(value="maxDate", defaultValue="") String maxDate,
-			@RequestParam(
-                    value = "page",
-                    required = false,
-                    defaultValue = "0") int page,
-            @RequestParam(
-                    value = "size",
-                    required = false,
-                    defaultValue = "10") int size
+			@RequestParam(value="produto", required = false, defaultValue="") String text,
+			@RequestParam(value="minate", required = false, defaultValue="") String minDate,
+			@RequestParam(value="maxDate", required = false, defaultValue="") String maxDate,
+			@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size
                     
             ){
 		text= URL.decodeParam(text);

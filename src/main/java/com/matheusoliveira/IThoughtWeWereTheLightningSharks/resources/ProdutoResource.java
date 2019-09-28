@@ -28,18 +28,24 @@ public class ProdutoResource {
 	public ProdutoService service;
 	
 	@GetMapping
-	public Page<Produto> findAll(@RequestParam(
-            value = "page",
-            required = false,
-            defaultValue = "0") int page,
-    @RequestParam(
-            value = "size",
-            required = false,
-            defaultValue = "10") int size
-            
-    ){
-		return service.findAll(page, size);
-	} 
+	public Page<Produto> findAll(){
+		int page=0;
+		int size=10;
+		return service.findAll(page,size);
+	}
+	@GetMapping("/search")
+	public Page<Produto> findAllByPage(
+			@RequestParam(
+		            value = "page",
+		            required = false,
+		            defaultValue = "0") int page,
+		    @RequestParam(
+		            value = "size",
+		            required = false,
+		            defaultValue = "10") int size
+		    ){
+		return service.findAll(page,size);
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Produto> findById(@PathVariable String id){
