@@ -16,130 +16,22 @@
   
 > Obs.: O atributo id é obrigatório para atualizar qualquer entidade.
 
-### Usuários
+## Swagger
 
-1.  GET All
-
-| Method | Route | Header | Params |
-| --- | --- | --- | --- | 
-| GET | `http://127.0.0.1:8082/usuarios` | Content-Type : application/json | none |
-
-| Return | _Traz uma lista paginada de usuarios e suas permissões_ |
-| --- | --- |
-```js
-{
-    "content": [
-        {
-            "id": "5d8df1b7dad0190768dd6cb7",
-            "nome": "Joaquin",
-            "permissoes": [
-                {
-                    "id": "5d8df1b7dad0190768dd6cb3",
-                    "descricao": "Adicionar mesas"
-                },
-                {
-                    "id": "5d8df1b7dad0190768dd6cb4",
-                    "descricao": "Inserir produto"
-                },
-                {
-                    "id": "5d8df1b7dad0190768dd6cb5",
-                    "descricao": "Realizar pedido"
-                },
-                {
-                    "id": "5d8df1b7dad0190768dd6cb6",
-                    "descricao": "Listar compras"
-                }
-            ]
-        },
-        {
-            "id": "5d8df1b7dad0190768dd6cb8",
-            "nome": "Garçoneide",
-            "permissoes": [
-                {
-                    "id": "5d8df1b7dad0190768dd6cb5",
-                    "descricao": "Realizar pedido"
-                }
-            ]
-        }
-    ],
-    "last": true,
-    "totalPages": 1,
-    "totalElements": 10,
-    "size": 10,
-    "number": 0,
-    "sort": null,
-    "first": true,
-    "numberOfElements": 2
-}
-```
-2.  GET All com filtro
-
-| Method | Route | Header | Params |
-| --- | --- | --- | --- | 
-| GET | `http://127.0.0.1:8082/usuarios/search?page=0&size=1` | Content-Type : application/json | size & page |
-
-| Return | _Traz uma lista paginada por filtros, de usuarios e suas permissões_ |
-| --- | --- |
-```js
-{
-    "content": [
-        {
-            "id": "5d8df1b7dad0190768dd6cb7",
-            "nome": "Joaquin",
-            "permissoes": [
-                {
-                    "id": "5d8df1b7dad0190768dd6cb3",
-                    "descricao": "Adicionar mesas"
-                },
-                {
-                    "id": "5d8df1b7dad0190768dd6cb4",
-                    "descricao": "Inserir produto"
-                },
-                {
-                    "id": "5d8df1b7dad0190768dd6cb5",
-                    "descricao": "Realizar pedido"
-                },
-                {
-                    "id": "5d8df1b7dad0190768dd6cb6",
-                    "descricao": "Listar compras"
-                }
-            ]
-        },
-        {
-            "id": "5d8df1b7dad0190768dd6cb8",
-            "nome": "Garçoneide",
-            "permissoes": [
-                {
-                    "id": "5d8df1b7dad0190768dd6cb5",
-                    "descricao": "Realizar pedido"
-                }
-            ]
-        }
-    ],
-    "last": true,
-    "totalPages": 1,
-    "totalElements": 1,
-    "size": 1,
-    "number": 0,
-    "sort": null,
-    "first": true,
-    "numberOfElements": 2
-}
-```
-
+> Para obter mais detalhes sobre as requisisções utilizadas, use a API de documentação Swagger já configurada no aplicação. Para isso clone o projeto, execute como spring boot app, abra no navegador http://localhost:8082/swagger-ui.html e pronto! 
 
 #### Compras
   
-| Método | Rota | Retorno |
-| --- | --- | --- |
-| GET | `http://127.0.0.1:8082/compras` | Retorna todas as compras |
-| GET | `http://127.0.0.1:8082/compras/{ID}` | Retorna a compra com id passado no parâmetro |
-| GET | `http://127.0.0.1:8082/compras/{ID}/pedidos` | Retorna os pedidos da compra com id passado no parâmetro |
-| GET | `http://127.0.0.1:8082/compras/search` | Retorna a lista de compras da mesa passada no filtro |
-| POST  | `http://127.0.0.1:8082/compras`  | Adiciona uma nova compra |
-| POST  | `http://127.0.0.1:8082/compras/{ID}/pedidos`  | Adiciona um novo pedido na compra com id passado no parâmetro |
-| PATH  | `http://127.0.0.1:8082/compras/{ID}`  | Altera os atributos da compras com id passado no parâmetro  |
-| DELETE  | `http://127.0.0.1:8082/compras/{ID}`  | Deleta a compra com id passado no parâmetro |
+| Método | Rota | Retorno | Header | Params |
+| --- | --- | --- | --- | --- | 
+| GET | `http://127.0.0.1:8082/compras` | Retorna todas as compras |Content-Type : application/json | none |
+| GET | `http://127.0.0.1:8082/compras/{ID}` | Retorna a compra com id passado no parâmetro | Content-Type : application/json | none |
+| GET | `http://127.0.0.1:8082/compras/{ID}/pedidos` | Retorna os pedidos da compra com id passado no parâmetro | Content-Type : application/json | none |
+| GET | `http://127.0.0.1:8082/compras/search` | Retorna a lista de compras da mesa passada no filtro | Content-Type : application/json | none |
+| POST  | `http://127.0.0.1:8082/compras`  | Adiciona uma nova compra | Content-Type : application/json | none |
+| POST  | `http://127.0.0.1:8082/compras/{ID}/pedidos`  | Adiciona um novo pedido na compra com id passado no parâmetro | Content-Type : application/json | none |
+| PATH  | `http://127.0.0.1:8082/compras/{ID}`  | Altera os atributos da compras com id passado no parâmetro  | Content-Type : application/json | none |
+| DELETE  | `http://127.0.0.1:8082/compras/{ID}`  | Deleta a compra com id passado no parâmetro | Content-Type : application/json | none |
 
 > Obs.: quando inserir uma nova compra, deve-se deixar os camposde encerramento, cartao, dinheiro vazios, 
 pois serao atualizadas quando ele realizar  GET: `http://127.0.0.1:8082/compras/{ID}/encerrar`
